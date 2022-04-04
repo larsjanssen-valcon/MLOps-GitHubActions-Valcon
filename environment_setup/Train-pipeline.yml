@@ -1,0 +1,56 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-20.04'
+
+variables:
+  - group: dbx-variablegroup
+  - name: dbx_url
+    value: '$[variables.dbx_org_url]'
+  - name: token
+    value: '$[variables.dbx_token]'
+  - name: db_job_id
+    value: $[variables.job_id]
+jobs:
+  - job: Training_of_Notebooks
+    strategy:
+      matrix:
+        Python35:
+          python.version: '3.7'
+
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.7'
+        architecture: 'x64'
+        addToPath: true
+
+    - task: CmdLine@2
+      displayName: "Install Requirements"
+      inputs:
+        script: |
+          python -m pip install --upgrade pip==21.3.1
+          python -m pip install -r ./environment_setup/requirements.txt
+
+    - task: ArchiveFiles@2
+      displayName: "Archive OPS files"
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/scripts'
+        includeRootFolder: true
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/ops-scripts_$(Build.BuildId).zip'
+        replaceExistingArchive: true
+    
+    - task: PublishBuildArtifacts@1
+      displayName: "Publish OPS zip artifact"
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/ops-scripts_$(Build.BuildId).zip'
+        ArtifactName: 'opsscripts'
+    
+    - task: AzureCLI@1
+      displayName: 'Run train.py notebook in DB'
+      inputs:
+        azureSubscription: 'quick-starts-sc-rg'
+        scriptLocation: 'inlineScript'
+        inlineScript: 'python ./db_service/run_notebooks.py --job_id $(db_job_id) --dbx_token $(token) --dbx_org_url $(dbx_url)'

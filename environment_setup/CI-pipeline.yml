@@ -1,0 +1,54 @@
+trigger:
+  branches:
+    include:
+      - development
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+  
+
+strategy:
+  matrix:
+    Python35:
+      python.version: '3.7'
+
+steps:
+- task: UsePythonVersion@0
+  displayName: 'Use Python $(python.version)'
+  inputs:
+    versionSpec: '$(python.version)'
+    architecture: 'x64'
+    addToPath: true
+# Install pip==21.3.1 as 22.0.1 breaks pipeline see this issue:
+# https://github.com/readthedocs/readthedocs.org/issues/8864
+
+- task: CmdLine@2
+  displayName: "Install Python packages"
+  inputs:
+    script: |
+      python -m pip install --upgrade pip==21.3.1
+
+  ### Code quality check ###
+- script: |
+    pip install flake8
+    pip install flake8_formatter_junit_xml
+    flake8 .
+    echo Build:: $(Build.SourcesDirectory)
+  displayName: 'Check code quality'
+
+  ### Archive notebook scripts ###
+- task: ArchiveFiles@2
+  displayName: "Archive OPS files"
+  inputs:
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/scripts'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/ops-scripts_$(Build.BuildId).zip'
+    replaceExistingArchive: true
+
+- task: PublishBuildArtifacts@1
+  displayName: "Publish OPS zip artifact"
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/ops-scripts_$(Build.BuildId).zip'
+    ArtifactName: 'opsscripts'
