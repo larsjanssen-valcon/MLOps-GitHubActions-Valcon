@@ -35,10 +35,6 @@ jobs:
 
       # Code quality check
       - name: Code quality check
-      - uses: actions/setup-python@v3
-        with:
-          python-version: '3.7'
-          architecture: 'x64'
       - run: |
           pip install flake8
           pip install flake8_formatter_junit_xml
