@@ -35,14 +35,14 @@ jobs:
 
       # Code quality check
       - name: Code quality check
-      - run: |
+        run: |
           pip install flake8
           pip install flake8_formatter_junit_xml
           flake8 .
 
       # Archive notebook scripts
       - name: Archive OPS files
-      - uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3
         with:
           name: opsscripts
           path: scripts/
