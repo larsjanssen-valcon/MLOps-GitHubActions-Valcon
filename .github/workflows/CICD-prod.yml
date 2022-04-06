@@ -14,6 +14,7 @@ on:
 env:
   DBX_TOKEN: ${{secrets.DBX_TOKEN}}
   DBX_ORG_URL: ${{secrets.DBX_ORG_URL}}
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -60,4 +61,4 @@ jobs:
       # Code quality check
       - name: Deploy notebooks to workspace
         run: |
-          python db_service/notebooks_to_db_dev.py -source_path "./scripts" -target_path "/Production/scripts" -dbx_api_token ${{secrets.DBX_TOKEN}} -dbx_ws_url ${{secrets.DBX_ORG_URL}}
+          python db_service/notebooks_to_db_dev.py -source_path "./scripts" -target_path "/Production/scripts" -dbx_api_token $DBX_TOKEN -dbx_ws_url $DBX_ORG_URL
