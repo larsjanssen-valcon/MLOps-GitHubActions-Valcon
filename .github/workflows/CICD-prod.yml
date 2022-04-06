@@ -12,8 +12,8 @@ on:
 
 
 env:
-  DBX_TOKEN: ${{secrets.dbx-env.DBX_TOKEN}}
-  DBX_ORG_URL: ${{secrets.dbx-env.DBX_ORG_URL}}
+  DBX_TOKEN: ${{secrets.DBX_TOKEN}}
+  DBX_ORG_URL: ${{secrets.DBX_ORG_URL}}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
