@@ -10,11 +10,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-
-env:
-  DBX_TOKEN: ${{secrets.DBX_TOKEN}}
-  DBX_ORG_URL: ${{secrets.DBX_ORG_URL}}
-
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -60,5 +55,8 @@ jobs:
           pip install -r "./environment_setup/requirements.txt"
       # Code quality check
       - name: Deploy notebooks to workspace
+        env:
+          DBX_TOKEN: ${{secrets.DBX_TOKEN}}
+          DBX_ORG_URL: ${{secrets.DBX_ORG_URL}}
         run: |
           python db_service/notebooks_to_db_dev.py -source_path "./scripts" -target_path "/Production/scripts" -dbx_api_token $DBX_TOKEN -dbx_ws_url $DBX_ORG_URL
