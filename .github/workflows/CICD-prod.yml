@@ -1,7 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
-
+name: CICD-prod
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
@@ -11,6 +10,10 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+
+env:
+  DBX_TOKEN: ${{secrets.DBX_TOKEN}}
+  DBX_ORG_URL: ${{secrets.DBX_ORG_URL}}
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -56,5 +59,4 @@ jobs:
       # Code quality check
       - name: Deploy notebooks to workspace
         run: |
-          python db_service/notebooks_to_db_dev.py -source_path "./scripts" -target_path $(target_path) -dbx_api_token $(dbx_token) -dbx_ws_url $(dbx_org_url)
-      # Still requires (secret variables)
+          python db_service/notebooks_to_db_dev.py -source_path "./scripts" -target_path "/Production/scripts" -dbx_api_token ${{secrets.DBX_TOKEN}} -dbx_ws_url ${{secrets.DBX_ORG_URL}}
