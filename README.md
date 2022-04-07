@@ -86,7 +86,7 @@ To create a resource group:
 
 ## Exercise 1: Setup New Project in Azure DevOps
 
-In this exercise you will set up a project in DevOps and import a repository that we have build for you.
+In this exercise you will set up a project in DevOps and import a repository that we have built for you.
 
 Duration: 20 minutes
 
