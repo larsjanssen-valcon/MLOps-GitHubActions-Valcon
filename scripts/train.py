@@ -5,7 +5,7 @@
 # MAGIC ## As a data scientist, this is where I write my training code.
 
 # COMMAND ----------
-
+# Test the development release pipeline
 # Import necessary modules
 import argparse
 import urllib
