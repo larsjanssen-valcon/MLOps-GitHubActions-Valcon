@@ -7,20 +7,21 @@ The Contoso Corporation is a fictional but representative global manufacturing c
 
 ## Technology overview
 
-Azure Machine Learning uses a Machine Learning Operations (MLOps) approach, which improves the quality and consistency of your machine learning solutions. Azure Machine Learning Service provides the following MLOps capabilities:
+MLflow uses a Machine Learning Operations (MLOps) approach, which improves the quality and consistency of your machine learning solutions. 
+MLflow provides the following MLOps capabilities:
 
-- Integration with Azure Pipelines. Define continuous integration and deployment workflows for your models.
+- Integration with pipelines. Define continuous integration and deployment workflows for your models.
 - A model registry that maintains multiple versions of your trained models.
 - Model validation. Automatically validate your trained models and select the optimal configuration for deploying them into production.
 - Deploy your models as a web service in the cloud, locally, or to IoT Edge devices.
 - Monitor your deployed model's performance, so you can drive improvements in the next version of the model.
 
-## AI, Experience - MLOps with Azure Machine Learning and Azure DevOps <TO UPDATE ONCE FINAL>
+## AI, Experience - MLOps with MLflow and GitHub Actions <TO UPDATE ONCE FINAL>
 
 - [Data & AI Tech Immersion Workshop - Product Review Guide and Lab Instructions](#data---ai-tech-immersion-workshop---product-review-guide-and-lab-instructions)
   * [Scenario overview](#scenario-overview)
   * [Technology overview](#technology-overview)
-  * [AI, Experience - MLOps with Azure Machine Learning and Azure DevOps](#ai--experience---mlops-with-azure-machine-learning-and-azure-devops)
+  * [AI, Experience - MLOps with MLflow and Azure DevOps](#ai--experience---mlops-with-azure-machine-learning-and-azure-devops)
   * [Prerequisite: resource group](#prerequisite--resource-group)
   * [Exercise 1: Setup New Project in Azure DevOps](#exercise-1--setup-new-project-in-azure-devops)
     + [Task 1: Import Quickstart code from a GitHub Repo](#task-1--import-quickstart-code-from-a-github-repo)
@@ -602,7 +603,7 @@ Now that we have the Train Pipeline, we will run the pipeline by triggering a De
 
 4. Scroll down and review the model artifacts that were created for this model.
 
-   ![Review model artifacts](medial/../media/devops-build-outputs-05.png "Registered dataset details in Azure Machine Learning studio")
+   ![Review model artifacts](medial/../media/devops-build-outputs-05.png "Registered dataset details in MLflow")
 
 
 ## Exercise 6: Run the Release Pipelines
@@ -705,4 +706,4 @@ Duration: 30 minutes
 
 ### Additional resources and more information
 
-To learn more about MLOps with the Azure Machine Learning service, visit the [documentation](https://docs.microsoft.com/en-us/azure/machine-learning/service/concept-model-management-and-deployment)
+To learn more about MLOps with the MLflow service, visit the [documentation](https://www.mlflow.org/docs/latest/index.html)
