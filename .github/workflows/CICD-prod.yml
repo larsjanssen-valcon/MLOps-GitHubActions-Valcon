@@ -3,7 +3,7 @@
 name: CICD-prod
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
+  # Triggers the workflow on push events but only for the main branch
   push:
     branches: [ main ]
 
@@ -12,7 +12,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+  # This workflow contains a two jobs called "CI" and "CD"
   CI:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -46,17 +46,21 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it and sets up Python
       - uses: actions/checkout@v3
+      # Set up Python
       - uses: actions/setup-python@v3
         with:
           python-version: '3.7'
           architecture: 'x64'
+      # Install pip and install requirements for the release python file
       - run: |
           python -m pip install --upgrade pip
           pip install -r "./environment_setup/requirements.txt"
-      # Code quality check
+      # Deploy notebooks using a Python file 
       - name: Deploy notebooks to workspace
+      # Set token and dbx_url as environment variables
         env:
           DBX_TOKEN: ${{secrets.DBX_TOKEN}}
           DBX_ORG_URL: ${{secrets.DBX_ORG_URL}}
+      # Run the Python script
         run: |
           python db_service/notebooks_to_db_dev.py -source_path "./scripts" -target_path "/Production/scripts" -dbx_api_token $DBX_TOKEN -dbx_ws_url $DBX_ORG_URL
