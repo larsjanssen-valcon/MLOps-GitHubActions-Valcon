@@ -10,18 +10,18 @@ The Contoso Corporation is a fictional but representative global manufacturing c
 MLflow uses a Machine Learning Operations (MLOps) approach, which improves the quality and consistency of your machine learning solutions. 
 MLflow provides the following MLOps capabilities:
 
-- Integration with pipelines. Define continuous integration and deployment workflows for your models.
-- A model registry that maintains multiple versions of your trained models.
-- Model validation. Automatically validate your trained models and select the optimal configuration for deploying them into production.
-- Deploy your models as a web service in the cloud, locally, or to IoT Edge devices.
-- Monitor your deployed model's performance, so you can drive improvements in the next version of the model.
+- Integration with pipelines: define continuous integration and deployment workflows for your models.
+- Model registry: maintain multiple versions of your trained models.
+- Model validation: automatically validate your trained models and select the optimal configuration for deploying them into production.
+- Deployment: productionize your models as a web service in the cloud, locally, or to IoT Edge devices.
+- Assessment: monitor your deployed model's performance, so you can drive improvements in the next version of the model.
 
 ## AI, Experience - MLOps with MLflow and GitHub Actions <TO UPDATE ONCE FINAL>
 
 - [Data & AI Tech Immersion Workshop - Product Review Guide and Lab Instructions](#data---ai-tech-immersion-workshop---product-review-guide-and-lab-instructions)
   * [Scenario overview](#scenario-overview)
   * [Technology overview](#technology-overview)
-  * [AI, Experience - MLOps with MLflow and Azure DevOps](#ai--experience---mlops-with-azure-machine-learning-and-azure-devops)
+  * [AI, Experience - MLOps with MLflow and GitHub Actions](#ai--experience---mlops-with-azure-machine-learning-and-azure-devops)
   * [Prerequisite: resource group](#prerequisite--resource-group)
   * [Exercise 1: Setup New Project in Azure DevOps](#exercise-1--setup-new-project-in-azure-devops)
     + [Task 1: Import Quickstart code from a GitHub Repo](#task-1--import-quickstart-code-from-a-github-repo)
