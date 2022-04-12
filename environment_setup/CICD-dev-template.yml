@@ -59,10 +59,13 @@ jobs:
           pip install -r "./environment_setup/requirements.txt"
       # Deploy notebooks using a Python file 
       - name: Deploy notebooks to workspace
-      # Set token and dbx_url as environment variables
+      ## TODO: In order to deploy the notebooks to databricks, the generated token and organisation url of databricks need to be used as environment variables here
+      ## TODO: add two environment variables DBX_TOKEN and DBX_ORG_URL to this section. 
+      ## TODO: DBX_TOKEN should have ${{secrets.DBX_TOKEN}} as value. DBX_ORG_URL should have ${{secrets.DBX_ORG_URL}} as value
+      # Set token and url as environment variables
         env:
-          DBX_TOKEN: ${{secrets.DBX_TOKEN}}
-          DBX_ORG_URL: ${{secrets.DBX_ORG_URL}}
+          env1_to_be_added: value1_to_be_added
+          env2_to_be_added: value2_to_be_added 
       # Run the Python script
         run: |
           python db_service/notebooks_to_db_dev.py -source_path "./scripts" -target_path "/Development/scripts" -dbx_api_token $DBX_TOKEN -dbx_ws_url $DBX_ORG_URL
