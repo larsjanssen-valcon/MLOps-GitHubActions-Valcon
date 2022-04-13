@@ -146,7 +146,7 @@ GitHub actions works with so called 'workflow' files. These are `.yml` files tha
    ![Edit CI pipeline.](media/edit-and-commit.png "CI pipeline")
 
 ### Task 2: Run the CI Pipeline
-1. Test the pipeline pipeline by going into the **Actions** tab and selecting **CI** in the workflow options. You can manually trigger the workflow by pressing **Run workflow**.
+1. Test the pipeline by going into the **Actions** tab and selecting **CI** in the workflow options. You can manually trigger the workflow by pressing **Run workflow**.
    ![Run workflow CI.](media/run-ci-workflow.png "Run workflow CI")
 
 ### Task 3: Review output of CI pipeline
@@ -155,16 +155,54 @@ GitHub actions works with so called 'workflow' files. These are `.yml` files tha
    **Hint:** if the pipeline fails make sure that you have made the correct changes in the `.yml` script. You can verify this by debugging through the terminal window, or by comparing your `CI-pipeline.yml` file with the `./environment_setup/CI-pipeline-solution.yml` file.
    ![Inspect workflow CI.](media/inspect-ci-workflow.png "Inspect workflow CI")
 
-## Exercise 3: Setup the Development Release Pipeline
+## Exercise 3: Setup the CICD Development Pipeline
 
-After a new `push` to the `development` branch we would like our Data Science files to be deployed automatically to the Development environment of the Databricks workspace. For this we will create a CI/CD pipeline that performs the CI steps, after which the Data Science files are deployed to Databricks in a CD step.
+After a new `push` to the `development` branch, we would like our Data Science files to be deployed automatically to the Development workspace. For this we will create a CI/CD pipeline that performs the CI steps, after which the Data Science files are deployed to Databricks in a CD step.
+
 Duration: 20 minutes
 
-## Exercise 4: Create Production Release Pipeline
+### Task 1: Setup the CICD Development pipeline
+1. In the `./environment_setup` folder you can find templates of the the different pipelines. For this task we will use the `CICD-dev-template.yml` file. 
 
-We want to create a release pipeline for the `main` branch as well. If the `development` notebooks have been successfully reviewed by other people on the team, the `main` branch can be updated with a new script. The notebooks are now brought to production. Hence, this pipeline is often defined as the production release pipeline.
+   ![CICD dev template](media/CICD-dev-template.png "CICD dev template")
 
-Duration: 15 minutes
+2. Select and copy the content of the `CICD-dev-template.yml` file.
+
+   ![Copy content.](media/CI-pipeline-copy-content.png "Copy content") 
+
+3. Click on the GitHub Actions tab.
+
+   ![Click.](media/to-github-actions.png "Click") 
+
+4. Create a **New workflow**:
+   ![New workflow.](media/new-workflow.png "New workflow")
+
+5. Choose the option to **set up a workflow yourself**
+   ![Setup yourself.](media/setup-yourself.png "Setup yourself")
+
+6. Rename the `.yml` filename on top to `CICD-dev.yml`. And replace the content of the file with the copied template `.yml` file.
+   ![Rename and copy.](media/rename-and-copy-cicd-dev.png "rename and copy")
+
+7. Edit the contents of the copied content according to the comment instructions. Here, you can clearly see the CI/CD structure. First, a quality check is done, followed by a deployment step. After you have made the changes accordingly, press the button **Start commit** to commit the changes. Choose an appropriate commit message.
+   ![Edit CI pipeline.](media/edit-and-commit.png "CI pipeline")
+
+### Task 2: Run the CICD Development Pipeline
+1. Test the pipeline by going into the **Actions** tab and selecting **CICD-dev** in the workflow options. You can manually trigger the workflow by pressing **Run workflow**.
+   ![Run workflow CI.](media/run-cicd-dev-workflow.png "Run workflow CI")
+
+### Task 3: Review output of CI pipeline
+1. Inspect the pipeline run by clicking on the run that has just started. Inspect the two jobs (CI and CD), make sure that all steps have been performed.
+
+   **Hint:** if the pipeline fails make sure that you have made the correct changes in the `.yml` script. You can verify this by debugging through the terminal window. Make sure that your GitHub Secrets are set correctly, and that they are referenced in the CD section of the pipeline. Or, you can of course compare your `CICD-dev.yml` file with the `./environment_setup/CICD-dev-solution.yml` file.
+   ![Inspect workflow CI.](media/inspect-ci-workflow.png "Inspect workflow CI")
+## (Extra challenge) Exercise 4: Create Production Pipeline
+
+After a new `push` to the `main` branch, we would like our Data Science files to be deployed automatically to the Development workspace. For this we will create a CI/CD pipeline that performs the CI steps, after which the Data Science files are deployed to Databricks in a CD step. In essence, these steps are the same as for the CI/CD development pipeline. In this case however, we want to our Data Science files to a different Databricks workspace folder. Make sure to inspect in the workflow that this the files are deployed to a different Databricks workspace folder.
+
+Duration: 25 minutes
+
+### Task 1: Setup, run and review a CICD-prod pipeline
+1. Solution `.yml` file can be found in the `./environment_setup/CICD-prod-solution.yml` file.
 ## Exercise 5: Setup and Run the Train Pipeline
 
 In this exercise, the Train pipeline will be set up. The training pipeline will be created with Azure DataFactory, an Azure service that allows for orchestrating Data Science activities. In our case we want to orchestrate the execution of the Databricks notebooks that were deployed in the previous step. 
