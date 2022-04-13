@@ -190,19 +190,19 @@ Duration: 20 minutes
 1. Test the pipeline by going into the **Actions** tab and selecting **CICD-dev** in the workflow options. You can manually trigger the workflow by pressing **Run workflow**.
    ![Run workflow CI.](media/run-cicd-dev-workflow.png "Run workflow CI")
 
-### Task 3: Review output of CI pipeline
+### Task 3: Review output of CICD Development pipeline
 1. Inspect the pipeline run by clicking on the run that has just started. Inspect the two jobs (CI and CD), make sure that all steps have been performed.
 
    **Hint:** if the pipeline fails make sure that you have made the correct changes in the `.yml` script. You can verify this by debugging through the terminal window. Make sure that your GitHub Secrets are set correctly, and that they are referenced in the CD section of the pipeline. Or, you can of course compare your `CICD-dev.yml` file with the `./environment_setup/CICD-dev-solution.yml` file.
-   ![Inspect workflow CI.](media/inspect-ci-workflow.png "Inspect workflow CI")
-## (Extra challenge) Exercise 4: Create Production Pipeline
+## Exercise 4 (Extra challenge): Create Production Pipeline
 
 After a new `push` to the `main` branch, we would like our Data Science files to be deployed automatically to the Development workspace. For this we will create a CI/CD pipeline that performs the CI steps, after which the Data Science files are deployed to Databricks in a CD step. In essence, these steps are the same as for the CI/CD development pipeline. In this case however, we want to our Data Science files to a different Databricks workspace folder. Make sure to inspect in the workflow that this the files are deployed to a different Databricks workspace folder.
 
 Duration: 25 minutes
 
 ### Task 1: Setup, run and review a CICD-prod pipeline
-1. Solution `.yml` file can be found in the `./environment_setup/CICD-prod-solution.yml` file.
+1. Solution `.yml` file can be found in the `./environment_setup/CICD-prod-solution.yml` file. 
+2. Make sure to deploy the production files to the `/Production/scripts` Databricks workspace folder, instead of the `/Development/scripts` Databricks workspace folder. To do this, look at the CICD-dev pipeline, in this pipeline the scripts are deployed to the `/Development/scripts` folder. Change the `.py` file arguments accordingly.
 ## Exercise 5: Setup and Run the Train Pipeline
 
 In this exercise, the Train pipeline will be set up. The training pipeline will be created with Azure DataFactory, an Azure service that allows for orchestrating Data Science activities. In our case we want to orchestrate the execution of the Databricks notebooks that were deployed in the previous step. 
