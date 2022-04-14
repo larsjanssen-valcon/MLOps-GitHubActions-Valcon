@@ -7,58 +7,40 @@ The Contoso Corporation is a fictional but representative global manufacturing c
 
 ## Technology overview
 
-Azure Machine Learning uses a Machine Learning Operations (MLOps) approach, which improves the quality and consistency of your machine learning solutions. Azure Machine Learning Service provides the following MLOps capabilities:
+MLflow uses a Machine Learning Operations (MLOps) approach, which improves the quality and consistency of your machine learning solutions. 
+MLflow provides the following MLOps capabilities:
 
-- Integration with Azure Pipelines. Define continuous integration and deployment workflows for your models.
-- A model registry that maintains multiple versions of your trained models.
-- Model validation. Automatically validate your trained models and select the optimal configuration for deploying them into production.
-- Deploy your models as a web service in the cloud, locally, or to IoT Edge devices.
-- Monitor your deployed model's performance, so you can drive improvements in the next version of the model.
+- Integration with pipelines: define continuous integration and deployment workflows for your models.
+- Model registry: maintain multiple versions of your trained models.
+- Model validation: automatically validate your trained models and select the optimal configuration for deploying them into production.
+- Deployment: productionize your models as a web service in the cloud, locally, or to IoT Edge devices.
+- Assessment: monitor your deployed model's performance, so you can drive improvements in the next version of the model.
 
-## AI, Experience - MLOps with Azure Machine Learning and Azure DevOps <TO UPDATE ONCE FINAL>
+## AI, Experience - MLOps with MLflow and GitHub Actions <TO UPDATE ONCE FINAL>
 
 - [Data & AI Tech Immersion Workshop - Product Review Guide and Lab Instructions](#data---ai-tech-immersion-workshop---product-review-guide-and-lab-instructions)
   * [Scenario overview](#scenario-overview)
   * [Technology overview](#technology-overview)
-  * [AI, Experience - MLOps with Azure Machine Learning and Azure DevOps](#ai--experience---mlops-with-azure-machine-learning-and-azure-devops)
+  * [AI, Experience - MLOps with MLflow and GitHub Actions <TO UPDATE ONCE FINAL>](#ai--experience---mlops-with-mlflow-and-github-actions--to-update-once-final-)
   * [Prerequisite: resource group](#prerequisite--resource-group)
   * [Exercise 1: Setup New Project in Azure DevOps](#exercise-1--setup-new-project-in-azure-devops)
-    + [Task 1: Import Quickstart code from a GitHub Repo](#task-1--import-quickstart-code-from-a-github-repo)
-    + [Task 3: Create a variable group](#task-3--create-a-variable-group)
-    + [Task 4: Create new Service Connection with Resource Group](#task-4--create-new-service-connection-with-resource-group)
+    + [Task 1: Import code from a GitHub Repo](#task-1--import-code-from-a-github-repo)
+    + [Task 2: Set Databricks variables as GitHub secrets](#task-2--set-databricks-variables-as-github-secrets)
   * [Exercise 2: Setup and Run the CI Pipeline](#exercise-2--setup-and-run-the-ci-pipeline)
-    + [Task 1: Set the Databricks variables](#task-1--set-the-databricks-variables)
-    + [Task 2: Setup the CI Pipeline](#task-2--setup-the-ci-pipeline)
-    + [Task 3: Run the CI Pipeline](#task-3--run-the-ci-pipeline)
-    + [Task 4: Review output of CI pipeline](#task-4--review-output-of-ci-pipeline)
-  * [Exercise 3: Setup and Run the Train Pipeline](#exercise-3--setup-and-run-the-train-pipeline)
+    + [Task 1: Setup the CI Pipeline](#task-1--setup-the-ci-pipeline)
+    + [Task 2: Run the CI Pipeline](#task-2--run-the-ci-pipeline)
+    + [Task 3: Review output of CI pipeline](#task-3--review-output-of-ci-pipeline)
+  * [Exercise 3: Setup the CICD Development Pipeline](#exercise-3--setup-the-cicd-development-pipeline)
+    + [Task 1: Setup the CICD Development pipeline](#task-1--setup-the-cicd-development-pipeline)
+    + [Task 2: Run the CICD Development Pipeline](#task-2--run-the-cicd-development-pipeline)
+    + [Task 3: Review output of CICD Development pipeline](#task-3--review-output-of-cicd-development-pipeline)
+  * [Exercise 4 (Extra challenge): Create Production Pipeline](#exercise-4--extra-challenge---create-production-pipeline)
+    + [Task 1: Setup, run and review a CICD-prod pipeline](#task-1--setup--run-and-review-a-cicd-prod-pipeline)
+  * [Exercise 5: Setup and Run the Train Pipeline](#exercise-5--setup-and-run-the-train-pipeline)
     + [Task 1: Setup the Azure DataFactory environment](#task-1--setup-the-azure-datafactory-environment)
     + [Task 2: Create the train pipeline](#task-2--create-the-train-pipeline)
     + [Task 3: Run the Train Pipeline](#task-3--run-the-train-pipeline)
     + [Task 4: Review Train Outputs](#task-4--review-train-outputs)
-  * [Exercise 4: Setup the Development Release Pipeline](#exercise-4--setup-the-development-release-pipeline)
-    + [Task 1: Create an Empty Job](#task-1--create-an-empty-job)
-    + [Task 2: Add CI-Pipeline Artifact](#task-2--add-ci-pipeline-artifact)
-    + [Task 3: Add Variables to notebooks to DB](#task-3--add-variables-to-notebooks-to-db)
-    + [Task 4: Setup Agent Pool for Deploy Notebooks to DB stage](#task-4--setup-agent-pool-for-deploy-notebooks-to-db-stage)
-    + [Task 5: Add Use Python Version task](#task-5--add-use-python-version-task)
-    + [Task 6: Add Install Requirements task](#task-6--add-install-requirements-task)
-    + [Task 7: Add Extract files task](#task-7--add-extract-files-task)
-    + [Task 8: Add Python script task](#task-8--add-python-script-task)
-    + [Task 9: Save the Release Pipeline](#task-9--save-the-release-pipeline)
-  * [Exercise 5: Create Production Release Pipeline](#exercise-5--create-production-release-pipeline)
-    + [Task 1: Create an Empty Job](#task-1--create-an-empty-job-1)
-    + [Task 2: Add CI-pipeline Artifacts](#task-2--add-ci-pipeline-artifacts)
-    + [Task 3: Add Variables to Deploy to DB](#task-3--add-variables-to-deploy-to-db)
-    + [Task 4: Setup Agent Pool for Deploy Notebooks to DB stage](#task-4--setup-agent-pool-for-deploy-notebooks-to-db-stage-1)
-    + [Task 5: Add Use Python Version task](#task-5--add-use-python-version-task-1)
-    + [Task 6: Add Install Requirements task](#task-6--add-install-requirements-task-1)
-    + [Task 7: Add Extract files task](#task-7--add-extract-files-task-1)
-    + [Task 8: Add Python script task](#task-8--add-python-script-task-1)
-    + [Task 9: Save the Release Pipeline](#task-9--save-the-release-pipeline-1)
-  * [Exercise 6: Run the Release Pipelines](#exercise-6--run-the-release-pipelines)
-    + [Task 1: Start Release pipeline](#task-1--start-release-pipeline)
-    + [Task 2: Monitor Release Pipeline](#task-2--monitor-release-pipeline)
   * [Exercise 6: Query the model and make predictions](#exercise-6--query-the-model-and-make-predictions)
     + [Task 1: Run score script](#task-1--run-score-script)
   * [Wrap-up](#wrap-up)
@@ -67,7 +49,6 @@ Azure Machine Learning uses a Machine Learning Operations (MLOps) approach, whic
     + [Task 1: Make Edits to Source Code](#task-1--make-edits-to-source-code)
     + [Task 2: Monitor Train Pipeline](#task-2--monitor-train-pipeline)
     + [Additional resources and more information](#additional-resources-and-more-information)
-
 ## Prerequisite: resource group
 
 A resource group is a container for resources (Azure services). It is equivalent to a folder that contains files.
@@ -85,394 +66,132 @@ To create a resource group:
 
 ## Exercise 1: Setup New Project in Azure DevOps
 
-In this exercise you will set up a project in DevOps and import a repository that we have build for you.
+In this exercise you will set up a repository in GitHub and import a repository that we have built for you.
 
 Duration: 20 minutes
 
-### Task 1: Import Quickstart code from a GitHub Repo
+### Task 1: Import code from a GitHub Repo
 
-In this task you import a repository from GitHub. This repository mostly consists of Python files and several YAML files. The Python files will perform the Data Science steps such as training, evaluating and deploying a model. The YAML files, are used to set up the pipelines in DevOps and determine which Python files to execute in which order.
+In this task you import a repository from GitHub. This repository mostly consists of Python files and several YAML files. The Python files will perform the Data Science steps such as training, evaluating and deploying a model. The YAML files, are used to set up the pipelines in GitHub Actions and determine which Python files to execute in which order.
 
-1. Within the new project:
+1. Within your repository import all files from the following [GitHub URL](https://github.com/larsjanssen-valcon/MLOps-GitHubActions-Valcon)
 
-   a. Select **Repos** from left navigation bar.
+### Task 2: Set Databricks variables as GitHub secrets
+1. Go to your repository settings and click on **Secrets**, in the sub-tab click on **Actions**.
 
-   b. Select **Import** from the content section.
+   ![Go to GitHub Actions Secretcs.](media/go-to-secrets.png "secrets")
 
-   ![Import Quickstart code from a GitHub Repo.](media/devops-project-03.png "Azure DevOps Repos")
+2. Create two new repository secrets by pressing the **New repository secret** button.
 
-2. Provide the following GitHub URL: TODO `https://github.com/Bramcals/MLOps-starter.git` and select **Import**. This should import the code required for the quickstart.
+   ![Create new Secret.](media/new-secret.png "new secret")
 
-   ![Provide the above GitHub URL and select import to import the source code.](media/devops-project-04.png "Import a Git repository dialog")
+   Create two repository secrets with the following values:
 
-### Task 3: Create a variable group
+   a. `DBX_ORG_URL` = `https://abs-test_url.azuredatabricks.net` This should contain the URL to your Databricks workspace.
 
-1. Select **Pipelines**, select **Library** and select **+ Variable group**
-
-   ![Go to create variable group section](media/variable-group.png "Create variable group")
-
-2. Name the variable group: `quickstart-variablegroup` and add the following variables;
-
-   a. `LOCATION` = `westeurope`
-
-   b. `RESOURCE_GROUP` = `RG-XXXXXX` (replace `XXXXXX` with your UniqueID)
-
-   c. `WORKSPACE_NAME` = `SNXXXXXX` (replace `XXXXXX` with your UniqueID)
-
-   d. `BASE_NAME` = workspace name in lower case letter and no special characters: `snxxxxxx` (replace `xxxxxx` with your UniqueID)
-
-   ![Add variables to variable group section](media/variable-group-vqd.png "adding variables to variable group")
-
-3. Select `Save`
-
-### Task 4: Create new Service Connection with Resource Group 
-
-We make a connection between DevOps and the resource group.
-
-1. From the left navigation select **Project settings** and then select **Service connections**.
-
-   ![Navigate to Project Settings, Service connections section.](media/devops-build-pipeline-03.png "Service Connections")
-
-2. Select **Create service connection**, select **Azure Resource Manager**, and then select **Next**.
-
-   ![Select Create Service Connection, Azure Resource Manager.](media/devops-build-pipeline-04.png "Azure Resource Manager")
-
-3. Select **Service principal (automatic)** and then select **Next**.
-
-   ![Select Service principal (automatic), and then select Next.](media/devops-build-pipeline-05.png "Service principal authentication")
-
-4. Provide the following information for the 'New Azure service connection' and then select **Save**:
-
-   a. Scope Level: `Subscription`
-
-   > **Note**: If you are unable to select your **Resource group**, do the following steps:
-
-   - Quit the `Service connection` dialog
-   - Make sure Cookies are allowed by the browser
-   - Refresh or reload the web browser
-   - Click on create new connection
-   - Perform steps 1 - 3 again
-   - In step 4, change the `Scope level` to **Subscription**
-   - Then a Microsoft Login windows should appear. Provide your login details
-   - Now, you should be able to select your resource group
-   - Name your service connection: `quick-starts-sc-rg`
-   - Grant access permission to all pipelines
-
-   b. Subscription: `VQD Data Science`
-
-   c. Resource group: This value should match the value you just provided in the library as a variable: `RG-XXXXXX` (replace `XXXXXX` with your UniqueID)
-
-   d. Service connection name: `quick-starts-sc-rg`
-
-   e. Grant access permission to all pipelines: this checkbox must be selected.
-
-   f. Select `Save`
-
-   ![Provide connection name, Azure Resource Group, Machine Learning Workspace, and then select Save. The resource group and machine learning workspace must match the value you provided in the YAML file.](media/sc-rg.png "Add an Azure Resource Manager service")
-
-
-## Exercise 2: Setup and Run the CI Pipeline
-
-In this exercise, the CI/CD pipeline will be built. In the CI pipeline a code quality check will be performed on all Python files in the repository. Unit tests can also be performed in this pipeline. In unit testing you break down the functionality of your program into discrete testable behaviors that you can test as individual units. However, for the sake of this tutorial, we will only do a code quality check.
-After a push to the `main` branch, the Databricks notebooks are updated in the Databricks workspace to match the Databricks notebooks in the `/scripts/` repository folder.
-### Task 1: Set the Databricks variables
-1. Select **Pipelines**, select **Library** and select **+ Variable group**
-![Go to create variable group section](media/variable-group_2.png "Create variable group")
-
-2. Name the variable group: `dbx-variablegroup` and add the following variables;
-
-   a. `dbx_org_url` = `https://abs-[XXXX].azuredatabricks.net` (replace `XXXX` such that it corresponds with your Databricks environment)
-
-   b. `dbx_token` = `XXXXXX` (replace `XXXXXX` with a Databricks token)
+   b. `DBX_TOKEN` = `XXXXXX` (replace `XXXXXX` with a Databricks token)
    
       You can create a Databricks token by going to the Databricks environment and under 'User Settings' create a new token
       ![User settings](media/dbx-usersettings.png "Go to user settings")
       Now you can generate a token by pressing the 'Generate New Token' button. The comment input is not relevant. In this case, "DBX_api" is chosen.
       ![Generate token](media/generate-token-1.png "Generate token")
       ![Copy token](media/generate-token-2.png "Copy token")
-      Now copy this token to the variable `dbx_token` in the `dbx-variablegroup` variable group.
+      Now copy this token to the variable `DBX_TOKEN` in the GitHub secret field for.
 
-   ![Add variables to variable group section](media/variable-group-dbx.png "adding variables to variable group")
+## Exercise 2: Setup and Run the CI Pipeline
 
-3. Select `Save`
-### Task 2: Setup the CI Pipeline
+In this exercise, the CI pipeline will be built. In the CI pipeline a code quality check will be performed on all Python files in the repository. Unit tests can also be performed in this pipeline. In unit testing you break down the functionality of your program into discrete testable behaviors that you can test as individual units. However, for the sake of this tutorial, we will only do a code quality check. Furthermore, we would like to have a copy of all Data Science scripts, saved as an artifact. For each CI pipeline run, there is a corresponding set of Data Science scripts.
 
-1. From left navigation select **Pipelines, Pipelines** and then select **Create pipeline**.
+After a pull-request to the `main` or `development` branch, we want this pipeline to be triggered. This enables the reviewer to review with the help of the code quality check. Furthermore, this ensures that for each pull-request there is a set of Data Science scripts saved as artifacts.
 
-   ![Navigate to Pipelines, Pipelines, and then select Create pipeline](media/devops-build-pipeline-07.png "Create Build Pipeline")
+### Task 1: Setup the CI Pipeline
+GitHub actions works with so called 'workflow' files. These are `.yml` files that contain steps that are executed during a pipeline run.
 
-2. Select **Azure Repos Git** as your code repository.
+1. In the `./environment_setup` folder you can find templates of the the different pipelines. For this task we will use the `CI-pipeline-template.yml` file. 
 
-   ![Select your code repository source for your new build pipeline.](media/devops-build-pipeline-08.png "Repository Source") 
+   ![CI template](media/CI-pipeline-template.png "CI template")
 
-3. Select **mlops-quickstart** as your repository. test
+2. Select and copy the content of the `CI-pipeline-template.yml` file.
 
-   ![Select mlops-quickstart as your repository.](media/devops-build-pipeline-09.png "Select Repository") 
+   ![Copy content.](media/CI-pipeline-copy-content.png "Copy content") 
 
-4. Select **Existing Azure Pipelines YAML file**, select **/environment_setup/CICD-pipeline.yml** as your path and select continue (change figure).
+3. Click on the GitHub Actions tab.
 
-   ![Ci pipeline.](media/CI-Pipeline-path.png "Select CI-pipeline path")
+   ![Click.](media/to-github-actions.png "Click") 
 
-5. Review your pipeline YAML
+4. Create a **New workflow**:
+   ![New workflow.](media/new-workflow.png "New workflow")
 
-   1. The first stage consists of a CI pipeline, which is triggered for a push into `main`, as well as for a push into the `development` branch.
+5. Choose the option to **set up a workflow yourself**
+   ![Setup yourself.](media/setup-yourself.png "Setup yourself")
 
-      a. The first step is to install Python
+6. Rename the `.yml` filename on top to `CI-pipeline.yml`. And replace the content of the file with the copied template `.yml` file.
+   ![Rename and copy.](media/rename-and-copy-ci.png "rename and copy")
 
-      b. The second step in this pipeline is the code quality check. It is also possible to create a report of this step. However, this is left out of scope.
+7. Edit the contents of the copied content according to the comment instructions. After you have made the changes accordingly, press the button **Start commit** to commit the changes. Choose an appropriate commit message.
+   ![Edit CI pipeline.](media/edit-and-commit.png "CI pipeline")
 
-      c. In the final step, all files in the `/scripts/` folder will be archived in a `.zip` file.
+### Task 2: Run the CI Pipeline
+1. Test the pipeline by going into the **Actions** tab and selecting **CI** in the workflow options. You can manually trigger the workflow by pressing **Run workflow**.
+   ![Run workflow CI.](media/run-ci-workflow.png "Run workflow CI")
 
-### Task 3: Run the CI Pipeline
+### Task 3: Review output of CI pipeline
+1. Inspect the pipeline run by clicking on the run that has just started. Press in the **Jobs** options on the **CI** option. Here you can inspect the pipeline run.
 
-1. Before running the pipeline, let us first give the pipeline a meaningful name. Select the arrow next to the run button.
+   **Hint:** if the pipeline fails make sure that you have made the correct changes in the `.yml` script. You can verify this by debugging through the terminal window, or by comparing your `CI-pipeline.yml` file with the `./environment_setup/CI-pipeline-solution.yml` file.
+   ![Inspect workflow CI.](media/inspect-ci-workflow.png "Inspect workflow CI")
 
-   ![Select yaml file as your setup.](media/save-CI-pipeline.png "Select save") <!-- !!Change figure!! -->
+## Exercise 3: Setup the CICD Development Pipeline
 
-2. Select **Save**
+After a new `push` to the `development` branch, we would like our Data Science files to be deployed automatically to the Development workspace. For this we will create a CI/CD pipeline that performs the CI steps, after which the Data Science files are deployed to Databricks in a CD step.
 
-3. Select the settings button next to the **Run Pipeline** button and select **Rename/move**
-
-   ![Select yaml file as your setup.](media/settings-save-rename.png "Select save") <!-- !!Change figure!! -->
-
-4. Rename the pipeline to **CI-Pipeline**
-
-5. Select **Run Pipeline** and press **Run**
-
-### Task 4: Review output of CI pipeline
-
-1. Select **Job** to view the current progress in the pipeline execution run
-
-   ![Select job.](media/Select-job.png "Select job") <!-- !!Change figure!! -->
-
-2. Review the steps
-
-3. Review the code quality check. In the check it can be seen that several packages are imported but never used. The check also indicates missing or redundant white lines/space and lines exceeding the character limit. With this check, we can adjust our code and make it more pythonic to increase standardization and manageability of work.
-
-   ![Check code quality.](media/Code-quality-check.png "Check code quality") 
-
-## Exercise 3: Setup the Development Release Pipeline
-
-Now that the CI pipeline has succeeded, artifacts (`/scripts/`) are available to set up the Release pipeline (sometimes called the deployment pipeline). Since we like the deployment to kick off directly after the CI pipeline has succeeded, we use a release pipeline. In this case, this deployment is triggered for a push on the `development` branch. This way, the notebooks are automatically updated to align with the notebooks in the `development` branch.
+This way, there is an integration check, there is a clear overview of the Data Science files that are deployed (saved as artifacts), before the latest version of the Data Science files is deployed to the Databricks workspace.
 
 Duration: 20 minutes
 
-### Task 1: Create an Empty Job
+### Task 1: Setup the CICD Development pipeline
+1. In the `./environment_setup` folder you can find templates of the the different pipelines. For this task we will use the `CICD-dev-template.yml` file. 
 
-1. Return to Azure DevOps and navigate to **Pipelines, Releases** and select **New pipeline**.
+   ![CICD dev template](media/CICD-dev-template.png "CICD dev template")
 
-   ![To create new Release Pipeline navigate to Pipelines, Releases and select New pipeline.](media/devops-release-pipeline-01.png "New Release Pipeline")
+2. Select and copy the content of the `CICD-dev-template.yml` file.
 
-2. Select **Empty job**.
+   ![Copy content.](media/CI-pipeline-copy-content.png "Copy content") 
 
-   ![Select empty job to start building the release pipeline.](media/devops-release-pipeline-02.png "Select a template: Empty job")
+3. Click on the GitHub Actions tab.
 
-3. Provide Stage name: `Deploy notebooks to DB` and close the dialog.
+   ![Click.](media/to-github-actions.png "Click") 
 
-### Task 2: Add CI-Pipeline Artifact
+4. Create a **New workflow**:
+   ![New workflow.](media/new-workflow.png "New workflow")
 
-1. Select **Add an artifact**. Select Source type: `Build`, Source: `CI-Pipeline`. Set the source alias to: `CI-pipeline`. Finally, select **Add**.
+5. Choose the option to **set up a workflow yourself**
+   ![Setup yourself.](media/setup-yourself.png "Setup yourself")
 
-   ![Provide information to add the build artifact.](media/attach-train-release.png "Add a build artifact")
+6. Rename the `.yml` filename on top to `CICD-dev.yml`. And replace the content of the file with the copied template `.yml` file.
+   ![Rename and copy.](media/rename-and-copy-cicd-dev.png "rename and copy")
 
-2. Select **Add an artifact**. Select Source type: `Azure Repositories`. Set Default branch: `development`. Set the source alias to: `development branch`. Finally, select **Add**.
+7. Edit the contents of the copied content according to the comment instructions. In this `.yml` file, you can clearly see the CI/CD structure. First, a quality check is done (CI), followed by a deployment step (CD). After you have made the changes accordingly, press the button **Start commit** to commit the changes. Choose an appropriate commit message.
+   ![Edit CI pipeline.](media/edit-and-commit.png "CI pipeline")
 
-   ![Provide information to add the build artifact.](media/attach-train-release2.png "Add a build artifact")
+### Task 2: Run the CICD Development Pipeline
+1. Test the pipeline by going into the **Actions** tab and selecting **CICD-dev** in the workflow options. You can manually trigger the workflow by pressing **Run workflow**.
+   ![Run workflow CI.](media/run-cicd-dev-workflow.png "Run workflow CI")
 
-3. Set a trigger for the artifact to release to be activated. Click on the trigger button on the `CI-Pipeline` artifact. Enable the continuous deployment trigger and set the build branch to include `development`.
+### Task 3: Review output of CICD Development pipeline
+1. Inspect the pipeline run by clicking on the run that has just started. Inspect the two jobs (CI and CD), make sure that all steps have been performed.
 
-   ![Provide information to add the build artifact.](media/release-trigger.png "Add a build artifact")
+   **Hint:** if the pipeline fails make sure that you have made the correct changes in the `.yml` script. You can verify this by debugging through the terminal window. Make sure that your GitHub Secrets are set correctly, and that they are referenced in the CD section of the pipeline. Or, you can of course compare your `CICD-dev.yml` file with the `./environment_setup/CICD-dev-solution.yml` file.
+## Exercise 4 (Extra challenge): Create Production Pipeline
 
-### Task 3: Add Variables to notebooks to DB
+After a new `push` to the `main` branch, we would like our Data Science files to be deployed automatically to the Development workspace as well. For this we will create a CI/CD pipeline that performs the CI steps, after which the Data Science files are deployed to Databricks in a CD step. In essence, these steps are the same as for the CI/CD development pipeline. In this case however, we want to our Data Science files to be deployed to a different Databricks workspace folder.
 
-1. Open **View stage tasks** link.
+Duration: 25 minutes
 
-   ![Open view stage tasks link.](media/deploy-to-db-view.png "View Stage Tasks")
-
-2. Open the **Variables** tab.
-
-   ![Open variables tab.](media/devops-release-pipeline-07.png "Release Pipeline Variables")
-
-3. Add two pipeline variables as name - value pairs and then select **Save** (use the default values in the **Save** dialog):
-
-These variables are needed to deploy the notebooks.
-
-    a. Name: `source_path` Value: `$(System.DefaultWorkingDirectory)/CI-Pipeline/opsscripts/scripts'
-
-    b. Name: `target_path` Value: `"/Development/scripts"`
-
-4. Next add the **dbx-variablegroup** to the variable groups in the **Variable groups** tab, by clicking on **Link variable group**.
-
-   ![Link variable group.](media/link-variable-group.png "Link variable group")
-
-<!-- ![Add four pipeline variables as name value pairs and save.](media/devops-release-pipeline-08.png "Add Pipeline Variables") -->
-
-### Task 4: Setup Agent Pool for Deploy Notebooks to DB stage
-
-1. Open the **Tasks** tab.
-
-   ![Open view stage tasks link.](media/devops-release-pipeline-09.png "Pipeline Tasks")
-
-2. Select **Agent job** and change **Agent pool** to `Azure Pipelines` and change **Agent Specification** to `ubuntu-latest`.
-
-   ![Change Agent pool to be Hosted Ubuntu 1604.](media/agent-ubuntu-latest.png "Agent Job Setup")
-
-### Task 5: Add Use Python Version task
-
-1. Select **Add a task to Agent job** (the **+** button), search for `Use Python Version`, and select **Add**.
-
-   ![Add Use Python Version task to Agent job.](media/devops-release-pipeline-11.png "Add Use Python Version Task")
-
-2. Provide **Display name:** `Use Python 3.7` and **Version spec:** `3.7`.
-
-   ![Provide Display name and Version spec for the Use Python version task.](media/use-python-version.png "Use Python Version Task Dialog")
-
-### Task 6: Add Install Requirements task
-
-1. Select **Add a task to Agent job** (the **+** button), search for `Bash`, and select **Add**.
-
-   ![Add Bash task to Agent job.](media/devops-release-pipeline-13.png "Add Bash Task")
-
-2. Provide **Display name:** `Install Requirements` and select the **Inline** option and provide the following script:
-
-   `# Install dependencies`
-
-   `python -m pip install --upgrade pip`
-   `pip install -r "$(System.DefaultWorkingDirectory)/development branch/environment_setup/requirements.txt"`
-
-   ![Provide Display name for the Bash task.](media/inline-script.png "Bash Task Dialog")
-
-### Task 7: Add Extract files task
-1. Select **Add a task to Agent job** (the **+** button), search for `Extract files`, and select **Add**.
-
-2. Provide **Display name:** `Extract files` and set the **Archive file patterns** to `$(System.DefaultWorkingDirectory)/CI-Pipeline/opsscripts/*.zip`. And set the **Destination folder** to `$(source_path)`.
-
-   ![Provide Display name for the Extract files task.](media/extract-files-script.png "Extract files Task Dialog")
-
-### Task 8: Add Python script task
-1. Select **Add a task to Agent job** (the **+** button), search for `Python script`, and select **Add**.
-
-2. Provide **Display name:** `Deploy notebooks to workspace` and set the **Script path** to: `$(System.DefaultWorkingDirectory)/development branch/db_service/notebooks_to_db_dev.py`. And set the **Arguments to** to: `-source_path "$(source_path)/scripts" -target_path $(target_path) -dbx_api_token $(dbx_token) -dbx_ws_url $(dbx_org_url)`.
-
-   ![Provide Display name for the Extract files task.](media/python-script-task.png "Python Task Dialog")
-
-### Task 9: Save the Release Pipeline
-
-1. Provide name: `Dev-release-DB`.
-
-2. Select: **Save** (use the default values in the **Save** dialog).
-
-   ![Provide name for the release pipeline and select save.](media/release-name-dev.png "save")
-
-## Exercise 4: Create Production Release Pipeline
-
-We want to create a release pipeline for the `main` branch as well. If the `development` notebooks have been successfully reviewed by other people on the team, the `main` branch can be updated with a new script. The notebooks are now brought to production. Hence, this pipeline is often defined as the production release pipeline.
-
-Duration 15 minutes
-
-### Task 1: Create an Empty Job
-
-1. Return to Azure DevOps and navigate to **Pipelines, Releases** and select **New pipeline**.
-
-   ![To create new Release Pipeline navigate to Pipelines, Releases and select New pipeline.](media/devops-create-release-prod.png "New Release Pipeline")
-
-2. Select **Empty job**.
-
-   ![Select empty job to start building the release pipeline.](media/devops-release-pipeline-02.png "Select a template: Empty job")
-
-### Task 2: Add CI-pipeline Artifacts
-
-1. Select **Add an artifact**. Select Source type: `Build`, Source: `CI-Pipeline`. Set the source alias to: `CI-pipeline`. Finally, select **Add**.
-
-   ![Provide information to add the build artifact.](media/attach-train-release.png "Add a build artifact")
-
-2. Select **Add an artifact**. Select Source type: `Azure Repositories`. Set Default branch: `main`. Set the source alias to: `main branch`. Finally, select **Add**.
-
-   ![Provide information to add the build artifact.](media/repo-artifact-main.png "Add a build artifact")
-
-3. Set a trigger for the artifact to release to be activated. Click on the trigger button on the `CI-Pipeline` artifact. Enable the continuous deployment trigger and set the build branch to include `main`.
-
-   ![Provide information to add the build artifact.](media/repo-artifact-trigger-main.png "Add a build artifact")
-
-### Task 3: Add Variables to Deploy to DB
-
-1. Open **View stage tasks** link.
-
-   ![Open view stage tasks link.](media/deploy-to-db-view.png "View Stage Tasks")
-
-2. Open the **Variables** tab.
-
-   ![Open variables tab.](media/devops-release-pipeline-07.png "Release Pipeline Variables")
-
-3. Add two pipeline variables as name - value pairs and then select **Save** (use the default values in the **Save** dialog):
-
-These variables are needed to deploy the notebooks.
-
-    a. Name: `source_path` Value: `$(System.DefaultWorkingDirectory)/CI-Pipeline/opsscripts/scripts'
-
-    b. Name: `target_path` Value: `"/Production/scripts"`
-
-4. Next add the **dbx-variablegroup** to the variable groups in the **Variable groups** tab, by clicking on **Link variable group**.
-
-   ![Link variable group.](media/link-variable-group.png "Link variable group")
-
-### Task 4: Setup Agent Pool for Deploy Notebooks to DB stage
-
-1. Open the **Tasks** tab.
-
-   ![Open view stage tasks link.](media/devops-release-pipeline-09.png "Pipeline Tasks")
-
-2. Select **Agent job** and change **Agent pool** to `Azure Pipelines` and change **Agent Specification** to `ubuntu-latest`.
-
-   ![Change Agent pool to be Hosted Ubuntu 1604.](media/agent-ubuntu-latest.png "Agent Job Setup")
-
-### Task 5: Add Use Python Version task
-
-1. Select **Add a task to Agent job** (the **+** button), search for `Use Python Version`, and select **Add**.
-
-   ![Add Use Python Version task to Agent job.](media/devops-release-pipeline-11.png "Add Use Python Version Task")
-
-2. Provide **Display name:** `Use Python 3.7` and **Version spec:** `3.7`.
-
-   ![Provide Display name and Version spec for the Use Python version task.](media/use-python-version.png "Use Python Version Task Dialog")
-
-### Task 6: Add Install Requirements task
-
-1. Select **Add a task to Agent job** (the **+** button), search for `Bash`, and select **Add**.
-
-   ![Add Bash task to Agent job.](media/devops-release-pipeline-13.png "Add Bash Task")
-
-2. Provide **Display name:** `Install Requirements` and select the **Inline** option and provide the following script:
-
-   `# Install dependencies`
-
-   `python -m pip install --upgrade pip`
-   `pip install -r "$(System.DefaultWorkingDirectory)/main branch/environment_setup/requirements.txt"`
-
-   ![Provide Display name for the Bash task.](media/inline-script-main.png "Bash Task Dialog")
-
-### Task 7: Add Extract files task
-1. Select **Add a task to Agent job** (the **+** button), search for `Extract files`, and select **Add**.
-
-2. Provide **Display name:** `Extract files` and set the **Archive file patterns** to `$(System.DefaultWorkingDirectory)/CI-Pipeline/opsscripts/*.zip`. And set the **Destination folder** to `$(source_path)`.
-
-   ![Provide Display name for the Extract files task.](media/extract-files-script.png "Extract files Task Dialog")
-
-### Task 8: Add Python script task
-1. Select **Add a task to Agent job** (the **+** button), search for `Python script`, and select **Add**.
-
-2. Provide **Display name:** `Deploy notebooks to workspace` and set the **Script path** to: `$(System.DefaultWorkingDirectory)/main branch/db_service/notebooks_to_db_dev.py`. And set the **Arguments to** to: `-source_path "$(source_path)/scripts" -target_path $(target_path) -dbx_api_token $(dbx_token) -dbx_ws_url $(dbx_org_url)`.
-
-   ![Provide Display name for the Extract files task.](media/python-script-task-main.png "Python Task Dialog")
-
-### Task 9: Save the Release Pipeline
-
-1. Provide name: `Prod-release-DB`.
-
-2. Select: **Save** (use the default values in the **Save** dialog).
-
-   ![Provide name for the release pipeline and select save.](media/release-name-prod.png "save")
-
+### Task 1: Setup, run and review a CICD-prod pipeline
+1. Make sure to deploy the production files to the `/Production/scripts` Databricks workspace folder, instead of the `/Development/scripts` Databricks workspace folder. To do this, look at the CICD-dev pipeline, in this pipeline the scripts are deployed to the `/Development/scripts` folder. Change the `.py` file arguments accordingly.
+2. The solution `.yml` file can be found in the `./environment_setup/CICD-prod-solution.yml` file. 
+ 
 ## Exercise 5: Setup and Run the Train Pipeline
 
 In this exercise, the Train pipeline will be set up. The training pipeline will be created with Azure DataFactory, an Azure service that allows for orchestrating Data Science activities. In our case we want to orchestrate the execution of the Databricks notebooks that were deployed in the previous step. 
@@ -602,32 +321,7 @@ Now that we have the Train Pipeline, we will run the pipeline by triggering a De
 
 4. Scroll down and review the model artifacts that were created for this model.
 
-   ![Review model artifacts](medial/../media/devops-build-outputs-05.png "Registered dataset details in Azure Machine Learning studio")
-
-
-## Exercise 6: Run the Release Pipelines
-
-In this exercise you will execute the release pipeline and use the artifact from the previous train pipeline to deploy a model. Normally the release pipeline would be executed when the train pipeline has finished. Therefore, we would have to restart the train pipeline. Due to time constraints we will not do this, but instead trigger the release manually.
-
-### Task 1: Start Release pipeline
-
-1. Navigate to **Pipelines, Releases** and select **create release**
-
-   ![Create release.](media/create-release.png "create release")
-
-2. Select **Create**. Note that you can also activate a single automatic trigger here, instead of automatically triggering every time a new build artifact is available from the train pipeline (like we have done now)
-
-   ![Create release.](media/create.png "Create")
-
-### Task 2: Monitor Release Pipeline
-
-1. Navigate to **Pipelines, Releases**. Observe that the Release pipeline is automatically triggered upon successful completion of the Train pipeline. Click on the button shown in the figure to view pipeline logs.
-
-   ![Navigate to Pipelines, Releases and Select as shown in the figure to view pipeline logs.](media/devops-test-pipelines-05.png "Pipelines - Releases")
-
-2. The release pipeline will run for about 5 minutes. Proceed to the next task when the release pipeline successfully completes. Proceed to start the Production release pipeline.
-
-3. After the release pipelines are finished, confirm that the workspace folders are updated and filled with the notebooks that are in the Git repository.
+   ![Review model artifacts](medial/../media/devops-build-outputs-05.png "Registered dataset details in MLflow")
 
 ## Exercise 6: Query the model and make predictions
 
@@ -669,40 +363,6 @@ If you don't have a free subscription and you would like to delete all your reso
 
 3. Click on "Delete Resource group" in the top menu bar.
 
-## Take-Home Exercise: Test train and Release Pipelines
-
-Now that we have set up the release pipeline, it can be tested by executing the train pipeline and checking whether the release is automatically triggered to deploy the model. You will execute the train pipeline, by changing some parameters of the algorithm in the training step. This change, will trigger the pipeline to be automatically executed. Once it is done, an artifact is available and the release is triggered. Note: the model will only be deployed if the trained model has a higher accuracy score than the current deployed model.
-
-Duration: 30 minutes
-
-### Task 1: Make Edits to Source Code
-
-1. Navigate to: **Repos -> Files -> scripts -> `train.py`**.
-
-2. **Edit** `train.py`.
-
-3. Change the learning rate **(learning_rate)** of the model from **0.1** to **0.001**.
-
-4. Change the number of estimators **(n_estimators)** from **10** to **30**.
-
-5. Select **Commit**.
-
-   ![Make edits to train.py by changing the learning rate. Select Commit after editing.](media/screenshot-lr-.png "Edit Train.py")
-
-6. Provide comment: `Improving model performance: changed learning rate.` and select **Commit**.
-
-   ![Provide commit comment for train.py.](media/devops-test-pipelines-02.png "Commit - Comment")
-
-### Task 2: Monitor Train Pipeline
-
-1. Navigate to **Pipelines, Pipelines**. Observe that the train pipeline is triggered because of the source code change.
-
-   ![Navigate to Pipelines, Builds.](media/devops-test-pipelines-03.png "Pipelines - pipelines")
-
-2. Select the pipeline run and monitor the pipeline steps. The pipeline will run for 16-18 minutes. After the model has been trained, check whether the release pipeline is triggered and the new model is deployed.
-
-   ![Monitor train Pipeline. It will take around 15 minutes to complete.](media/devops-test-pipelines-04.png "Train Pipeline Steps")
-
 ### Additional resources and more information
 
-To learn more about MLOps with the Azure Machine Learning service, visit the [documentation](https://docs.microsoft.com/en-us/azure/machine-learning/service/concept-model-management-and-deployment)
+To learn more about MLOps with the MLflow service, visit the [documentation](https://www.mlflow.org/docs/latest/index.html)
