@@ -5,12 +5,14 @@ on:
   # Triggers the workflow on push or pull request events
   push:
     branches:
-      - main
-      - development
-  pull_request:
-    branches:
-      - main
-      - development
+    - main
+    - development
+    ## TODO:
+    # For now this CI Action is set to trigger on a push on main and development
+    # However, we want this CI Action to run for a pull request event on the main and development branch
+    # Change this trigger above such that this Action is triggered at a pull request (for main and development)
+    # Hint: use this link for more information on Action triggers
+    # Link: https://docs.github.com/en/enterprise-server@3.4/actions/using-workflows/workflow-syntax-for-github-actions#onpull_requestpull_request_targetbranchesbranches-ignore
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -36,15 +38,15 @@ jobs:
           python -m pip install --upgrade pip==21.3.1
 
       # Code quality check
+      ## TODO: In the next run command first install flake8 and flake8_formatter_junit_xml. Install these packages with "pip install".
+      ## TODO: after installing, make sure to run flake by executing "flake8 --exit-zero ." 
       - name: Code quality check
         run: |
-          pip install flake8
-          pip install flake8_formatter_junit_xml
-          flake8 --exit-zero .
-      # With the "--exit-zero" argument we define that this run does not fail if there are PEP8 errors found
-      # If you want CI to fail here you would simply have to remove "--exit-zero"
+          echo "Underneath enter the commands for code quality check (see TODOs)"
 
       # Archive notebook scripts as artifacts
+      # With this action we archive the Data Science scripts as an artifact,
+      # which are saved and can be reviewed anytime this is required.
       - name: Archive OPS files
         uses: actions/upload-artifact@v3
         with:
