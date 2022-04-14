@@ -189,8 +189,9 @@ After a new `push` to the `main` branch, we would like our Data Science files to
 Duration: 25 minutes
 
 ### Task 1: Setup, run and review a CICD-prod pipeline
-1. Solution `.yml` file can be found in the `./environment_setup/CICD-prod-solution.yml` file. 
-2. Make sure to deploy the production files to the `/Production/scripts` Databricks workspace folder, instead of the `/Development/scripts` Databricks workspace folder. To do this, look at the CICD-dev pipeline, in this pipeline the scripts are deployed to the `/Development/scripts` folder. Change the `.py` file arguments accordingly.
+1. Make sure to deploy the production files to the `/Production/scripts` Databricks workspace folder, instead of the `/Development/scripts` Databricks workspace folder. To do this, look at the CICD-dev pipeline, in this pipeline the scripts are deployed to the `/Development/scripts` folder. Change the `.py` file arguments accordingly.
+2. The solution `.yml` file can be found in the `./environment_setup/CICD-prod-solution.yml` file. 
+ 
 ## Exercise 5: Setup and Run the Train Pipeline
 
 In this exercise, the Train pipeline will be set up. The training pipeline will be created with Azure DataFactory, an Azure service that allows for orchestrating Data Science activities. In our case we want to orchestrate the execution of the Databricks notebooks that were deployed in the previous step. 
