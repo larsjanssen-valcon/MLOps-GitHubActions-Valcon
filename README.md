@@ -21,45 +21,26 @@ MLflow provides the following MLOps capabilities:
 - [Data & AI Tech Immersion Workshop - Product Review Guide and Lab Instructions](#data---ai-tech-immersion-workshop---product-review-guide-and-lab-instructions)
   * [Scenario overview](#scenario-overview)
   * [Technology overview](#technology-overview)
-  * [AI, Experience - MLOps with MLflow and GitHub Actions](#ai--experience---mlops-with-azure-machine-learning-and-azure-devops)
+  * [AI, Experience - MLOps with MLflow and GitHub Actions <TO UPDATE ONCE FINAL>](#ai--experience---mlops-with-mlflow-and-github-actions--to-update-once-final-)
   * [Prerequisite: resource group](#prerequisite--resource-group)
   * [Exercise 1: Setup New Project in Azure DevOps](#exercise-1--setup-new-project-in-azure-devops)
-    + [Task 1: Import Quickstart code from a GitHub Repo](#task-1--import-quickstart-code-from-a-github-repo)
-    + [Task 3: Create a variable group](#task-3--create-a-variable-group)
-    + [Task 4: Create new Service Connection with Resource Group](#task-4--create-new-service-connection-with-resource-group)
+    + [Task 1: Import code from a GitHub Repo](#task-1--import-code-from-a-github-repo)
+    + [Task 2: Set Databricks variables as GitHub secrets](#task-2--set-databricks-variables-as-github-secrets)
   * [Exercise 2: Setup and Run the CI Pipeline](#exercise-2--setup-and-run-the-ci-pipeline)
-    + [Task 1: Set the Databricks variables](#task-1--set-the-databricks-variables)
-    + [Task 2: Setup the CI Pipeline](#task-2--setup-the-ci-pipeline)
-    + [Task 3: Run the CI Pipeline](#task-3--run-the-ci-pipeline)
-    + [Task 4: Review output of CI pipeline](#task-4--review-output-of-ci-pipeline)
-  * [Exercise 3: Setup and Run the Train Pipeline](#exercise-3--setup-and-run-the-train-pipeline)
+    + [Task 1: Setup the CI Pipeline](#task-1--setup-the-ci-pipeline)
+    + [Task 2: Run the CI Pipeline](#task-2--run-the-ci-pipeline)
+    + [Task 3: Review output of CI pipeline](#task-3--review-output-of-ci-pipeline)
+  * [Exercise 3: Setup the CICD Development Pipeline](#exercise-3--setup-the-cicd-development-pipeline)
+    + [Task 1: Setup the CICD Development pipeline](#task-1--setup-the-cicd-development-pipeline)
+    + [Task 2: Run the CICD Development Pipeline](#task-2--run-the-cicd-development-pipeline)
+    + [Task 3: Review output of CICD Development pipeline](#task-3--review-output-of-cicd-development-pipeline)
+  * [Exercise 4 (Extra challenge): Create Production Pipeline](#exercise-4--extra-challenge---create-production-pipeline)
+    + [Task 1: Setup, run and review a CICD-prod pipeline](#task-1--setup--run-and-review-a-cicd-prod-pipeline)
+  * [Exercise 5: Setup and Run the Train Pipeline](#exercise-5--setup-and-run-the-train-pipeline)
     + [Task 1: Setup the Azure DataFactory environment](#task-1--setup-the-azure-datafactory-environment)
     + [Task 2: Create the train pipeline](#task-2--create-the-train-pipeline)
     + [Task 3: Run the Train Pipeline](#task-3--run-the-train-pipeline)
     + [Task 4: Review Train Outputs](#task-4--review-train-outputs)
-  * [Exercise 4: Setup the Development Release Pipeline](#exercise-4--setup-the-development-release-pipeline)
-    + [Task 1: Create an Empty Job](#task-1--create-an-empty-job)
-    + [Task 2: Add CI-Pipeline Artifact](#task-2--add-ci-pipeline-artifact)
-    + [Task 3: Add Variables to notebooks to DB](#task-3--add-variables-to-notebooks-to-db)
-    + [Task 4: Setup Agent Pool for Deploy Notebooks to DB stage](#task-4--setup-agent-pool-for-deploy-notebooks-to-db-stage)
-    + [Task 5: Add Use Python Version task](#task-5--add-use-python-version-task)
-    + [Task 6: Add Install Requirements task](#task-6--add-install-requirements-task)
-    + [Task 7: Add Extract files task](#task-7--add-extract-files-task)
-    + [Task 8: Add Python script task](#task-8--add-python-script-task)
-    + [Task 9: Save the Release Pipeline](#task-9--save-the-release-pipeline)
-  * [Exercise 5: Create Production Release Pipeline](#exercise-5--create-production-release-pipeline)
-    + [Task 1: Create an Empty Job](#task-1--create-an-empty-job-1)
-    + [Task 2: Add CI-pipeline Artifacts](#task-2--add-ci-pipeline-artifacts)
-    + [Task 3: Add Variables to Deploy to DB](#task-3--add-variables-to-deploy-to-db)
-    + [Task 4: Setup Agent Pool for Deploy Notebooks to DB stage](#task-4--setup-agent-pool-for-deploy-notebooks-to-db-stage-1)
-    + [Task 5: Add Use Python Version task](#task-5--add-use-python-version-task-1)
-    + [Task 6: Add Install Requirements task](#task-6--add-install-requirements-task-1)
-    + [Task 7: Add Extract files task](#task-7--add-extract-files-task-1)
-    + [Task 8: Add Python script task](#task-8--add-python-script-task-1)
-    + [Task 9: Save the Release Pipeline](#task-9--save-the-release-pipeline-1)
-  * [Exercise 6: Run the Release Pipelines](#exercise-6--run-the-release-pipelines)
-    + [Task 1: Start Release pipeline](#task-1--start-release-pipeline)
-    + [Task 2: Monitor Release Pipeline](#task-2--monitor-release-pipeline)
   * [Exercise 6: Query the model and make predictions](#exercise-6--query-the-model-and-make-predictions)
     + [Task 1: Run score script](#task-1--run-score-script)
   * [Wrap-up](#wrap-up)
@@ -68,7 +49,6 @@ MLflow provides the following MLOps capabilities:
     + [Task 1: Make Edits to Source Code](#task-1--make-edits-to-source-code)
     + [Task 2: Monitor Train Pipeline](#task-2--monitor-train-pipeline)
     + [Additional resources and more information](#additional-resources-and-more-information)
-
 ## Prerequisite: resource group
 
 A resource group is a container for resources (Azure services). It is equivalent to a folder that contains files.
@@ -94,14 +74,20 @@ Duration: 20 minutes
 
 In this task you import a repository from GitHub. This repository mostly consists of Python files and several YAML files. The Python files will perform the Data Science steps such as training, evaluating and deploying a model. The YAML files, are used to set up the pipelines in GitHub Actions and determine which Python files to execute in which order.
 
-1. Within your repository import all files from the following GitHub URL: `https://github.com/larsjanssen-valcon/MLOps-GitHubActions-Valcon`.
+1. Within your repository import all files from the following [GitHub URL](https://github.com/larsjanssen-valcon/MLOps-GitHubActions-Valcon)
 
-### Task 2: Set the Databricks variables as GitHub secrets
+### Task 2: Set Databricks variables as GitHub secrets
 1. Go to your repository settings and click on **Secrets**, in the sub-tab click on **Actions**.
 
-2. Create two new repository secrets by pressing the **New repository secret** button. Create two repository secrets with the following values:
+   ![Go to GitHub Actions Secretcs.](media/go-to-secrets.png "secrets")
 
-   a. `DBX_ORG_URL` = `https://abs-[XXXX].azuredatabricks.net` (replace `XXXX` such that it corresponds with your Databricks environment)
+2. Create two new repository secrets by pressing the **New repository secret** button.
+
+   ![Create new Secret.](media/new-secret.png "new secret")
+
+   Create two repository secrets with the following values:
+
+   a. `DBX_ORG_URL` = `https://abs-test_url.azuredatabricks.net` This should contain the URL to your Databricks workspace.
 
    b. `DBX_TOKEN` = `XXXXXX` (replace `XXXXXX` with a Databricks token)
    
@@ -110,13 +96,13 @@ In this task you import a repository from GitHub. This repository mostly consist
       Now you can generate a token by pressing the 'Generate New Token' button. The comment input is not relevant. In this case, "DBX_api" is chosen.
       ![Generate token](media/generate-token-1.png "Generate token")
       ![Copy token](media/generate-token-2.png "Copy token")
-      Now copy this token to the variable `dbx_token` in the `dbx-variablegroup` variable group.
+      Now copy this token to the variable `DBX_TOKEN` in the GitHub secret field for.
 
 ## Exercise 2: Setup and Run the CI Pipeline
 
 In this exercise, the CI pipeline will be built. In the CI pipeline a code quality check will be performed on all Python files in the repository. Unit tests can also be performed in this pipeline. In unit testing you break down the functionality of your program into discrete testable behaviors that you can test as individual units. However, for the sake of this tutorial, we will only do a code quality check. Furthermore, we would like to have a copy of all Data Science scripts, saved as an artifact. For each CI pipeline run, there is a corresponding set of Data Science scripts.
 
-After a pull-request to the `main` or `development` branch, we want this pipeline to be triggered. This ensures that a reviewer can review with the help of the code quality check. Furthermore, this ensures that for each pull-request there is a set of Data Science scripts saved as artifacts.
+After a pull-request to the `main` or `development` branch, we want this pipeline to be triggered. This enables the reviewer to review with the help of the code quality check. Furthermore, this ensures that for each pull-request there is a set of Data Science scripts saved as artifacts.
 
 ### Task 1: Setup the CI Pipeline
 GitHub actions works with so called 'workflow' files. These are `.yml` files that contain steps that are executed during a pipeline run.
@@ -159,6 +145,8 @@ GitHub actions works with so called 'workflow' files. These are `.yml` files tha
 
 After a new `push` to the `development` branch, we would like our Data Science files to be deployed automatically to the Development workspace. For this we will create a CI/CD pipeline that performs the CI steps, after which the Data Science files are deployed to Databricks in a CD step.
 
+This way, there is an integration check, there is a clear overview of the Data Science files that are deployed (saved as artifacts), before the latest version of the Data Science files is deployed to the Databricks workspace.
+
 Duration: 20 minutes
 
 ### Task 1: Setup the CICD Development pipeline
@@ -183,7 +171,7 @@ Duration: 20 minutes
 6. Rename the `.yml` filename on top to `CICD-dev.yml`. And replace the content of the file with the copied template `.yml` file.
    ![Rename and copy.](media/rename-and-copy-cicd-dev.png "rename and copy")
 
-7. Edit the contents of the copied content according to the comment instructions. Here, you can clearly see the CI/CD structure. First, a quality check is done, followed by a deployment step. After you have made the changes accordingly, press the button **Start commit** to commit the changes. Choose an appropriate commit message.
+7. Edit the contents of the copied content according to the comment instructions. In this `.yml` file, you can clearly see the CI/CD structure. First, a quality check is done (CI), followed by a deployment step (CD). After you have made the changes accordingly, press the button **Start commit** to commit the changes. Choose an appropriate commit message.
    ![Edit CI pipeline.](media/edit-and-commit.png "CI pipeline")
 
 ### Task 2: Run the CICD Development Pipeline
@@ -196,7 +184,7 @@ Duration: 20 minutes
    **Hint:** if the pipeline fails make sure that you have made the correct changes in the `.yml` script. You can verify this by debugging through the terminal window. Make sure that your GitHub Secrets are set correctly, and that they are referenced in the CD section of the pipeline. Or, you can of course compare your `CICD-dev.yml` file with the `./environment_setup/CICD-dev-solution.yml` file.
 ## Exercise 4 (Extra challenge): Create Production Pipeline
 
-After a new `push` to the `main` branch, we would like our Data Science files to be deployed automatically to the Development workspace. For this we will create a CI/CD pipeline that performs the CI steps, after which the Data Science files are deployed to Databricks in a CD step. In essence, these steps are the same as for the CI/CD development pipeline. In this case however, we want to our Data Science files to a different Databricks workspace folder. Make sure to inspect in the workflow that this the files are deployed to a different Databricks workspace folder.
+After a new `push` to the `main` branch, we would like our Data Science files to be deployed automatically to the Development workspace as well. For this we will create a CI/CD pipeline that performs the CI steps, after which the Data Science files are deployed to Databricks in a CD step. In essence, these steps are the same as for the CI/CD development pipeline. In this case however, we want to our Data Science files to be deployed to a different Databricks workspace folder.
 
 Duration: 25 minutes
 
