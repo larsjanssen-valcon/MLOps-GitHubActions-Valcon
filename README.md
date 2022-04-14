@@ -363,40 +363,6 @@ If you don't have a free subscription and you would like to delete all your reso
 
 3. Click on "Delete Resource group" in the top menu bar.
 
-## Take-Home Exercise: Test train and Release Pipelines
-
-Now that we have set up the release pipeline, it can be tested by executing the train pipeline and checking whether the release is automatically triggered to deploy the model. You will execute the train pipeline, by changing some parameters of the algorithm in the training step. This change, will trigger the pipeline to be automatically executed. Once it is done, an artifact is available and the release is triggered. Note: the model will only be deployed if the trained model has a higher accuracy score than the current deployed model.
-
-Duration: 30 minutes
-
-### Task 1: Make Edits to Source Code
-
-1. Navigate to: **Repos -> Files -> scripts -> `train.py`**.
-
-2. **Edit** `train.py`.
-
-3. Change the learning rate **(learning_rate)** of the model from **0.1** to **0.001**.
-
-4. Change the number of estimators **(n_estimators)** from **10** to **30**.
-
-5. Select **Commit**.
-
-   ![Make edits to train.py by changing the learning rate. Select Commit after editing.](media/screenshot-lr-.png "Edit Train.py")
-
-6. Provide comment: `Improving model performance: changed learning rate.` and select **Commit**.
-
-   ![Provide commit comment for train.py.](media/devops-test-pipelines-02.png "Commit - Comment")
-
-### Task 2: Monitor Train Pipeline
-
-1. Navigate to **Pipelines, Pipelines**. Observe that the train pipeline is triggered because of the source code change.
-
-   ![Navigate to Pipelines, Builds.](media/devops-test-pipelines-03.png "Pipelines - pipelines")
-
-2. Select the pipeline run and monitor the pipeline steps. The pipeline will run for 16-18 minutes. After the model has been trained, check whether the release pipeline is triggered and the new model is deployed.
-
-   ![Monitor train Pipeline. It will take around 15 minutes to complete.](media/devops-test-pipelines-04.png "Train Pipeline Steps")
-
 ### Additional resources and more information
 
 To learn more about MLOps with the MLflow service, visit the [documentation](https://www.mlflow.org/docs/latest/index.html)
