@@ -154,7 +154,7 @@ Duration: 20 minutes
 ### Task 1: Setup the CICD Development pipeline
 1. In the `./environment_setup` folder you can find templates of the the different pipelines. For this task we will use the `CICD-dev-template.yml` file. 
 
-   ![CICD dev template](media/CICD-dev-template.png "CICD dev template")
+   ![CICD dev template](media/cicd-dev-template.png "CICD dev template")
 
 2. Select and copy the content of the `CICD-dev-template.yml` file.
 
