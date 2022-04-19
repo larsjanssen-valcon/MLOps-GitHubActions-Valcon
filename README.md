@@ -72,9 +72,9 @@ Duration: 20 minutes
 
 ### Task 1: Import code from a GitHub Repo
 
-In this task you import a repository from GitHub. This repository mostly consists of Python files and several YAML files. The Python files will perform the Data Science steps such as training, evaluating and deploying a model. The YAML files, are used to set up the pipelines in GitHub Actions and determine which Python files to execute in which order.
+In this task you import a repository from GitHub. This repository mostly consists of Python files and several YAML files. The Python files will perform the Data Science steps such as training, evaluating and deploying a model. The YAML files are used to set up the pipelines in GitHub Actions and determine which Python files to execute in which order.
 
-1. Within your repository import all files from the following [GitHub URL](https://github.com/larsjanssen-valcon/MLOps-GitHubActions-Valcon)
+1. Within your repository import all files from the current repository, with the following [GitHub URL](https://github.com/larsjanssen-valcon/MLOps-GitHubActions-Valcon)
 
 ### Task 2: Set Databricks variables as GitHub secrets
 1. Go to your repository settings and click on **Secrets**, in the sub-tab click on **Actions**.
