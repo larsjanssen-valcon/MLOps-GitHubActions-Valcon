@@ -138,7 +138,7 @@ GitHub Actions works with so called 'workflow' files. These are `.yml` files tha
    ![Run workflow CI.](media/run-ci-workflow.png "Run workflow CI")
 
 ### Task 3: Review output of CI pipeline
-1. Inspect the pipeline run by clicking on the run that has just started. Press in the **Jobs** options on the **CI** option. Here you can inspect the pipeline run.
+1. Inspect the pipeline run by clicking on the run that has just started. In the **Jobs** options, select **CI**. Here you can inspect the pipeline run.
 
    **Hint:** if the pipeline fails make sure that you have made the correct changes in the `.yml` script. You can verify this by debugging through the terminal window, or by comparing your `CI-pipeline.yml` file with the `./environment_setup/CI-pipeline-solution.yml` file.
    ![Inspect workflow CI.](media/inspect-ci-workflow.png "Inspect workflow CI")
