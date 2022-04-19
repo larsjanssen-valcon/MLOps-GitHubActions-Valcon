@@ -143,6 +143,11 @@ GitHub Actions works with so called 'workflow' files. These are `.yml` files tha
    **Hint:** if the pipeline fails make sure that you have made the correct changes in the `.yml` script. You can verify this by debugging through the terminal window, or by comparing your `CI-pipeline.yml` file with the `./environment_setup/CI-pipeline-solution.yml` file.
    ![Inspect workflow CI.](media/inspect-ci-workflow.png "Inspect workflow CI")
 
+    If the pipeline run is successful, you should now see the files appear in your Databricks workspace:
+
+   ![Inspect Databricks after workflow CI.](media/databricks-workspace-dev-success.png "Inspect Databricks workspace")
+
+
 ## Exercise 3: Setup the CICD Development Pipeline
 
 After a new `push` to the `development` branch, we would like our Data Science files to be deployed automatically to the Development workspace. For this we will create a CI/CD pipeline that performs the CI steps, after which the Data Science files are deployed to Databricks in a CD step.
