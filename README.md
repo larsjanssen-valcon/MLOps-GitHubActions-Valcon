@@ -23,7 +23,7 @@ MLflow provides the following MLOps capabilities:
   * [Technology overview](#technology-overview)
   * [AI, Experience - MLOps with MLflow and GitHub Actions <TO UPDATE ONCE FINAL>](#ai--experience---mlops-with-mlflow-and-github-actions--to-update-once-final-)
   * [Prerequisite: resource group](#prerequisite--resource-group)
-  * [Exercise 1: Setup New Project in Azure DevOps](#exercise-1--setup-new-project-in-azure-devops)
+  * [Exercise 1: Setup New Project in GitHub](#exercise-1--setup-new-project-in-azure-devops)
     + [Task 1: Import code from a GitHub Repo](#task-1--import-code-from-a-github-repo)
     + [Task 2: Set Databricks variables as GitHub secrets](#task-2--set-databricks-variables-as-github-secrets)
   * [Exercise 2: Setup and Run the CI Pipeline](#exercise-2--setup-and-run-the-ci-pipeline)
@@ -64,7 +64,7 @@ To create a resource group:
 6. Set region to `(Europe) West Europe`
 7. Click on -> Review + Create -> Create
 
-## Exercise 1: Setup New Project in Azure DevOps
+## Exercise 1: Setup New Project in GitHub
 
 In this exercise you will set up a repository in GitHub and import a repository that we have built for you.
 
