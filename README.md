@@ -23,7 +23,7 @@ MLflow provides the following MLOps capabilities:
   * [Technology overview](#technology-overview)
   * [AI, Experience - MLOps with MLflow and GitHub Actions <TO UPDATE ONCE FINAL>](#ai--experience---mlops-with-mlflow-and-github-actions--to-update-once-final-)
   * [Prerequisite: resource group](#prerequisite--resource-group)
-  * [Exercise 1: Setup New Project in Azure DevOps](#exercise-1--setup-new-project-in-azure-devops)
+  * [Exercise 1: Setup New Project in GitHub](#exercise-1--setup-new-project-in-azure-devops)
     + [Task 1: Import code from a GitHub Repo](#task-1--import-code-from-a-github-repo)
     + [Task 2: Set Databricks variables as GitHub secrets](#task-2--set-databricks-variables-as-github-secrets)
   * [Exercise 2: Setup and Run the CI Pipeline](#exercise-2--setup-and-run-the-ci-pipeline)
@@ -64,7 +64,7 @@ To create a resource group:
 6. Set region to `(Europe) West Europe`
 7. Click on -> Review + Create -> Create
 
-## Exercise 1: Setup New Project in Azure DevOps
+## Exercise 1: Setup New Project in GitHub
 
 In this exercise you will set up a repository in GitHub and import a repository that we have built for you.
 
@@ -72,9 +72,9 @@ Duration: 20 minutes
 
 ### Task 1: Import code from a GitHub Repo
 
-In this task you import a repository from GitHub. This repository mostly consists of Python files and several YAML files. The Python files will perform the Data Science steps such as training, evaluating and deploying a model. The YAML files, are used to set up the pipelines in GitHub Actions and determine which Python files to execute in which order.
+In this task you import a repository from GitHub. This repository mostly consists of Python files and several YAML files. The Python files will perform the Data Science steps such as training, evaluating and deploying a model. The YAML files are used to set up the pipelines in GitHub Actions and determine which Python files to execute in which order.
 
-1. Within your repository import all files from the following [GitHub URL](https://github.com/larsjanssen-valcon/MLOps-GitHubActions-Valcon)
+1. Within your repository import all files from the current repository, with the following [GitHub URL](https://github.com/larsjanssen-valcon/MLOps-GitHubActions-Valcon)
 
 ### Task 2: Set Databricks variables as GitHub secrets
 1. Go to your repository settings and click on **Secrets**, in the sub-tab click on **Actions**.
@@ -87,7 +87,9 @@ In this task you import a repository from GitHub. This repository mostly consist
 
    Create two repository secrets with the following values:
 
-   a. `DBX_ORG_URL` = `https://abs-test_url.azuredatabricks.net` This should contain the URL to your Databricks workspace.
+   a. `DBX_ORG_URL` = `https://abs-test_url.azuredatabricks.net` This should contain the URL to your Databricks workspace, which you can find in the Azure resource:
+
+    ![Find Databricks workspace URL](media/databricks-workspace-url.png)
 
    b. `DBX_TOKEN` = `XXXXXX` (replace `XXXXXX` with a Databricks token)
    
@@ -96,7 +98,7 @@ In this task you import a repository from GitHub. This repository mostly consist
       Now you can generate a token by pressing the 'Generate New Token' button. The comment input is not relevant. In this case, "DBX_api" is chosen.
       ![Generate token](media/generate-token-1.png "Generate token")
       ![Copy token](media/generate-token-2.png "Copy token")
-      Now copy this token to the variable `DBX_TOKEN` in the GitHub secret field for.
+      Now copy this token to the variable `DBX_TOKEN` in the GitHub secret field.
 
 ## Exercise 2: Setup and Run the CI Pipeline
 
@@ -105,9 +107,9 @@ In this exercise, the CI pipeline will be built. In the CI pipeline a code quali
 After a pull-request to the `main` or `development` branch, we want this pipeline to be triggered. This enables the reviewer to review with the help of the code quality check. Furthermore, this ensures that for each pull-request there is a set of Data Science scripts saved as artifacts.
 
 ### Task 1: Setup the CI Pipeline
-GitHub actions works with so called 'workflow' files. These are `.yml` files that contain steps that are executed during a pipeline run.
+GitHub Actions works with so called 'workflow' files. These are `.yml` files that contain steps that are executed during a pipeline run.
 
-1. In the `./environment_setup` folder you can find templates of the the different pipelines. For this task we will use the `CI-pipeline-template.yml` file. 
+1. In the `./environment_setup` folder you can find templates for the different pipelines. For this task we will use the `CI-pipeline-template.yml` file. 
 
    ![CI template](media/CI-pipeline-template.png "CI template")
 
@@ -128,7 +130,7 @@ GitHub actions works with so called 'workflow' files. These are `.yml` files tha
 6. Rename the `.yml` filename on top to `CI-pipeline.yml`. And replace the content of the file with the copied template `.yml` file.
    ![Rename and copy.](media/rename-and-copy-ci.png "rename and copy")
 
-7. Edit the contents of the copied content according to the comment instructions. After you have made the changes accordingly, press the button **Start commit** to commit the changes. Choose an appropriate commit message.
+7. Edit the contents of the copied content according to the comment instructions (marked as `TODO`). After you have made the changes accordingly, press the button **Start commit** to commit the changes. Choose an appropriate commit message.
    ![Edit CI pipeline.](media/edit-and-commit.png "CI pipeline")
 
 ### Task 2: Run the CI Pipeline
@@ -136,7 +138,7 @@ GitHub actions works with so called 'workflow' files. These are `.yml` files tha
    ![Run workflow CI.](media/run-ci-workflow.png "Run workflow CI")
 
 ### Task 3: Review output of CI pipeline
-1. Inspect the pipeline run by clicking on the run that has just started. Press in the **Jobs** options on the **CI** option. Here you can inspect the pipeline run.
+1. Inspect the pipeline run by clicking on the run that has just started. In the **Jobs** options, select **CI**. Here you can inspect the pipeline run.
 
    **Hint:** if the pipeline fails make sure that you have made the correct changes in the `.yml` script. You can verify this by debugging through the terminal window, or by comparing your `CI-pipeline.yml` file with the `./environment_setup/CI-pipeline-solution.yml` file.
    ![Inspect workflow CI.](media/inspect-ci-workflow.png "Inspect workflow CI")
@@ -152,7 +154,7 @@ Duration: 20 minutes
 ### Task 1: Setup the CICD Development pipeline
 1. In the `./environment_setup` folder you can find templates of the the different pipelines. For this task we will use the `CICD-dev-template.yml` file. 
 
-   ![CICD dev template](media/CICD-dev-template.png "CICD dev template")
+   ![CICD dev template](media/cicd-dev-template.png "CICD dev template")
 
 2. Select and copy the content of the `CICD-dev-template.yml` file.
 
