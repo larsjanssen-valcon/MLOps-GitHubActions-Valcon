@@ -87,7 +87,9 @@ In this task you import a repository from GitHub. This repository mostly consist
 
    Create two repository secrets with the following values:
 
-   a. `DBX_ORG_URL` = `https://abs-test_url.azuredatabricks.net` This should contain the URL to your Databricks workspace.
+   a. `DBX_ORG_URL` = `https://abs-test_url.azuredatabricks.net` This should contain the URL to your Databricks workspace, which you can find in the Azure resource:
+
+    ![Find Databricks workspace URL](media/databricks-workspace-url.png)
 
    b. `DBX_TOKEN` = `XXXXXX` (replace `XXXXXX` with a Databricks token)
    
