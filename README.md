@@ -98,7 +98,7 @@ In this task you import a repository from GitHub. This repository mostly consist
       Now you can generate a token by pressing the 'Generate New Token' button. The comment input is not relevant. In this case, "DBX_api" is chosen.
       ![Generate token](media/generate-token-1.png "Generate token")
       ![Copy token](media/generate-token-2.png "Copy token")
-      Now copy this token to the variable `DBX_TOKEN` in the GitHub secret field for.
+      Now copy this token to the variable `DBX_TOKEN` in the GitHub secret field.
 
 ## Exercise 2: Setup and Run the CI Pipeline
 
@@ -107,9 +107,9 @@ In this exercise, the CI pipeline will be built. In the CI pipeline a code quali
 After a pull-request to the `main` or `development` branch, we want this pipeline to be triggered. This enables the reviewer to review with the help of the code quality check. Furthermore, this ensures that for each pull-request there is a set of Data Science scripts saved as artifacts.
 
 ### Task 1: Setup the CI Pipeline
-GitHub actions works with so called 'workflow' files. These are `.yml` files that contain steps that are executed during a pipeline run.
+GitHub Actions works with so called 'workflow' files. These are `.yml` files that contain steps that are executed during a pipeline run.
 
-1. In the `./environment_setup` folder you can find templates of the the different pipelines. For this task we will use the `CI-pipeline-template.yml` file. 
+1. In the `./environment_setup` folder you can find templates for the different pipelines. For this task we will use the `CI-pipeline-template.yml` file. 
 
    ![CI template](media/CI-pipeline-template.png "CI template")
 
@@ -130,7 +130,7 @@ GitHub actions works with so called 'workflow' files. These are `.yml` files tha
 6. Rename the `.yml` filename on top to `CI-pipeline.yml`. And replace the content of the file with the copied template `.yml` file.
    ![Rename and copy.](media/rename-and-copy-ci.png "rename and copy")
 
-7. Edit the contents of the copied content according to the comment instructions. After you have made the changes accordingly, press the button **Start commit** to commit the changes. Choose an appropriate commit message.
+7. Edit the contents of the copied content according to the comment instructions (marked as `TODO`). After you have made the changes accordingly, press the button **Start commit** to commit the changes. Choose an appropriate commit message.
    ![Edit CI pipeline.](media/edit-and-commit.png "CI pipeline")
 
 ### Task 2: Run the CI Pipeline
