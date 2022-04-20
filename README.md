@@ -284,7 +284,7 @@ Now that we configured the Data Factory, we need to create the train pipeline th
       1. Select **New** 
       1. Configure the parameter
          1. Name: train_type
-         2. Value: adf_pipeline
+         2. Value: register_model
       ![Screenshot task](media/Azure-DataFactory-2.8.png) 
 
 1. On the left select **Databricks** again and then drag **Notebook** into the white canvas on the right.
