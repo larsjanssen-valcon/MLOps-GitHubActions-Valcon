@@ -210,34 +210,34 @@ Before we create the Train pipeline, we need to configure the Azure DataFactory.
 
 1. In the **Azure Portal** navigate to your resource group. 
 
-1. Select the Azure DataFactory resource called **adf-[NAME]**.
+2. Select the Azure DataFactory resource called **adf-[NAME]**.
     ![Screenshot task](media/Azure-DataFactory-1.1.png) 
 
-1. Select **Open** within the **Open Azure Data Factory Studio** square.
+3. Select **Open** within the **Open Azure Data Factory Studio** square.
    ![Screenshot task](media/Azure-DataFactory-1.3.png) 
 
-1. In the left navigation bar click on the blue **Toolbox icon** to open the **Manage screen**.
+4. In the left navigation bar click on the blue **Toolbox icon** to open the **Manage screen**.
    ![Screenshot task](media/Azure-DataFactory-1.4.png) 
 
-1. Select the blue **Plus icon** next to the text **New** to create a new Linked Service
+5. Select the blue **Plus icon** next to the text **New** to create a new Linked Service
    ![Screenshot task](media/Azure-DataFactory-1.5.png) 
 
-1. Select **Compute** next to **Data store**
+6. Select **Compute** next to **Data store**
    ![Screenshot task](media/Azure-DataFactory-1.6.png) 
 
-1. Select **Azure Databricks**
+7. Select **Azure Databricks**
    ![Screenshot task](media/Azure-DataFactory-1.7.png) 
 
-1. Configure the Azure Databricks linked service
+8. Configure the Azure Databricks linked service
    1. Name: AzureDatabricks
       ![Screenshot task](media/Azure-DataFactory-1.8.1.png) 
-   1. Azure subscription: iig-shareddnaplatformsandbox-prd
+   2. Azure subscription: iig-shareddnaplatformsandbox-prd
       ![Screenshot task](media/Azure-DataFactory-1.8.2.png) 
-   1. Databricks workspace: adb-[NAME] or dbw-[NAME]
+   3. Databricks workspace: adb-[NAME] or dbw-[NAME]
       ![Screenshot task](media/Azure-DataFactory-1.8.3.png) 
-   1. Select cluster: Existing interactive cluster
+   4. Select cluster: Existing interactive cluster
       ![Screenshot task](media/Azure-DataFactory-1.8.4.png) 
-   1. Generate an access Token for Databricks
+   5. Generate an access Token for Databricks
       1. Go to your Databricks workspace
       1. Select **Settings** icon and then **User Settings** in the lower left corner of your Databricks workspace.
          ![Screenshot task](media/Azure-DataFactory-1.8.5.2.png) 
@@ -247,15 +247,18 @@ Before we create the Train pipeline, we need to configure the Azure DataFactory.
          ![Screenshot task](media/Azure-DataFactory-1.8.5.4.png) 
       1. Copy the token with CTRL + C or right clicking the token text and select copy
          ![Screenshot task](media/Azure-DataFactory-1.8.5.5.png) 
-   1. Go back to your Azure Databricks linked service and paste the Access Token inside the **Access Token** field (CTRL + V or right clicking and select paste) **
+   6. Go back to your Azure Databricks linked service and paste the Access Token inside the **Access Token** field (CTRL + V or right clicking and select paste) **
        ![Screenshot task](media/Azure-DataFactory-1.8.6.png) 
        _** Please note: in practice it is not recommended to copy and paste Access Tokens manually. Instead of this, use an Azure KeyVault to store any credentials. For this training and simplicity purposes we have not used an Azure KeyVault._
 
-   1. Existing cluster id: Select one of the existing clusters. If none exist yet, create a new one in the **Compute** tab of your Databricks workspace.
+   7. Existing cluster id: Select one of the existing clusters. If none exist yet, create a new one in the **Compute** tab of your Databricks workspace first.
        ![Screenshot task](media/Azure-DataFactory-1.8.7.png) 
 
-1. Create the linked service by selecting **Create** at the bottom
-   ![Screenshot task](media/Azure-DataFactory-1.9.png) 
+9. Click **Test connection** at the bottom to verify that the linked service can be created:
+    ![Test Databricks connection](media/adf-test-databricks-connection.png)
+
+11. Create the linked service by selecting **Create** at the bottom
+    ![Screenshot task](media/Azure-DataFactory-1.9.png) 
 
 
 ### Task 2: Create the train pipeline
