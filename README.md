@@ -251,7 +251,7 @@ Before we create the Train pipeline, we need to configure the Azure DataFactory.
        ![Screenshot task](media/Azure-DataFactory-1.8.6.png) 
        _** Please note: in practice it is not recommended to copy and paste Access Tokens manually. Instead of this, use an Azure KeyVault to store any credentials. For this training and simplicity purposes we have not used an Azure KeyVault._
 
-   7. Existing cluster id: Select one of the existing clusters. If none exist yet, create a new one in the **Compute** tab of your Databricks workspace first.
+   7. Existing cluster id: Select one of the existing clusters. If none exist yet, create a new one in the **Compute** tab of your Databricks workspace first. When selecting a Databricks runtime, make sure to pick an ML cluster, and not a Standard one.
        ![Screenshot task](media/Azure-DataFactory-1.8.7.png) 
 
 9. Click **Test connection** at the bottom to verify that the linked service can be created:
@@ -278,7 +278,7 @@ Now that we configured the Data Factory, we need to create the train pipeline th
       ![Screenshot task](media/Azure-DataFactory-2.5.png) 
    1. Select **Azure Databricks** from the navigation bar in the middle of the screen and select the **AzureDatabricks** linked service from the dropdown menu
       ![Screenshot task](media/Azure-DataFactory-2.6.png) 
-   1. Write **/Production/scripts/train** in the text field on **Notebook path**
+   1. Write **/Production/scripts/train** in the text field on **Notebook path** (or use the browsing functionality to select the location in the UI).
       ![Screenshot task](media/Azure-DataFactory-2.7.png)  
    1. Expand the **Base parameters** by clicking on the arrow next to **Base parameters**
       1. Select **New** 
@@ -306,7 +306,7 @@ Now that we configured the Data Factory, we need to create the train pipeline th
 ### Task 3: Run the Train Pipeline
 Now that we have the Train Pipeline, we will run the pipeline by triggering a Debug run.
 
-1. Select **Debug** in the navigation bar at the top (right of **Save as template**, **Validate**)
+1. Select **Debug** in the navigation bar at the top (right of **Validate**)
    ![Screenshot task](media/Azure-DataFactory-3.1.png) 
 
 1. Monitor the Pipeline run at the bottom of the screen
