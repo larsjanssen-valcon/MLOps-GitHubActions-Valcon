@@ -316,7 +316,7 @@ Now that we have the Train Pipeline, we will run the pipeline by triggering a De
    
 ### Task 4: Review Train Outputs
 
-1. Log in to Go to your Databricks workspace. Make sure you select **Machine Learning** so you can access the models section. Open your **Models** section, and observe the versions of the registered model: `classifier`. The latest version is the one registered by the train pipeline you have run in the previous task.
+1. Log in to go to your Databricks workspace. Make sure you select **Machine Learning** so you can access the models section. Open your **Models** section, and observe the versions of the registered model: `classifier`. The latest version is the one registered by the train pipeline you have run in the previous task.
 
    ![See models in Databricks](media/devops-build-outputs-01.png "Select models in Databricks")
    ![See registered models in Databricks](media/devops-build-outputs-02.png "See registered models")    
