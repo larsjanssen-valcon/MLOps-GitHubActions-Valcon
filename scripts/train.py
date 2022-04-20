@@ -135,7 +135,7 @@ y_test = labels[training_samples + validation_samples:]
 workspace_dir = "/".join(dbutils.notebook.entry_point.getDbutils().notebook().getContext().notebookPath().get().split("/")[:-2]) # Folder of workspace
 if train_type == 'local':
     try:
-        experiment_path = f"{workspace_dir}/Experiments/{}".format(model_name)
+        experiment_path = f"{workspace_dir}/Experiments/{model_name}"
     except:
         print("Error folder does not yet exist!")
     # For now set the experiment name equal to the given model_name
