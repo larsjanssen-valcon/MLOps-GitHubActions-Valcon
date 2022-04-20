@@ -231,9 +231,9 @@ Before we create the Train pipeline, we need to configure the Azure DataFactory.
 1. Configure the Azure Databricks linked service
    1. Name: AzureDatabricks
       ![Screenshot task](media/Azure-DataFactory-1.8.1.png) 
-   1. Azure subscription: TODO: provide name
+   1. Azure subscription: iig-shareddnaplatformsandbox-prd
       ![Screenshot task](media/Azure-DataFactory-1.8.2.png) 
-   1. Databricks workspace: adb-[NAME]
+   1. Databricks workspace: adb-[NAME] or dbw-[NAME]
       ![Screenshot task](media/Azure-DataFactory-1.8.3.png) 
    1. Select cluster: Existing interactive cluster
       ![Screenshot task](media/Azure-DataFactory-1.8.4.png) 
@@ -251,7 +251,7 @@ Before we create the Train pipeline, we need to configure the Azure DataFactory.
        ![Screenshot task](media/Azure-DataFactory-1.8.6.png) 
        _** Please note: in practice it is not recommended to copy and paste Access Tokens manually. Instead of this, use an Azure KeyVault to store any credentials. For this training and simplicity purposes we have not used an Azure KeyVault._
 
-   1. Existing cluster id: Select one of the existing clusters
+   1. Existing cluster id: Select one of the existing clusters. If none exist yet, create a new one in the **Compute** tab of your Databricks workspace.
        ![Screenshot task](media/Azure-DataFactory-1.8.7.png) 
 
 1. Create the linked service by selecting **Create** at the bottom
