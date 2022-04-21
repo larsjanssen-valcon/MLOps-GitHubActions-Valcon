@@ -293,7 +293,7 @@ Now that we configured the Data Factory, we need to create the train pipeline th
    1. Select **Azure Databricks** from the navigation bar in the middle of the screen
    1. Select **AzureDatabricks** from the dropdown menu next to **Databricks linked service**
    1. Select **Setting** from the navigation bar in the middle of the screen
-   1. Write **/Development/scripts/validate** in the text field on **Notebook path**
+   1. Write **/Production/scripts/validate** in the text field on **Notebook path**
    1. Expand the **Base parameters** by clicking on the arrow next to **Base parameters**
    1. Select **New** 
    1. Configure the parameter
