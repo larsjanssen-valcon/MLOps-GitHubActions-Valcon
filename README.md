@@ -350,16 +350,13 @@ Duration: 5 minutes
 ## Wrap-up
 
 Congratulations on completing this tutorial.
-If you want to continue practicing with ML Ops, we have created additional exercises. Find out about automation and continous integration of ML Ops with the following exercise [link](#Additional-Exercise-Test-train-and-Release-Pipelines).
-If you no longer intend to use your Azure Portal subscriptions with your created resources, please do not forget to delete your resources. Instructions on how to delete your resources are provided in the following exercise [link](#Deletion-Exercise-Delete-resource-in-the-Azure-Portal)
-
 To recap, in this tutorial you learned about:
 
 1. Creating a Continuous Integration Pipeline to support continuous development.
 
-2. Creating a Train Pipeline to support model training.
-
-3. Creating a Release Pipeline to support model deployment.
+2. Creating a Release Pipeline to support model deployment.
+ 
+3. Creating a Train Pipeline to support model training.
 
 ## Deletion Exercise: Delete resource in the Azure Portal
 
