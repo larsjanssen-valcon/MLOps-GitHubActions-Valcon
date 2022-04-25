@@ -294,11 +294,6 @@ Now that we configured the Data Factory, we need to create the train pipeline th
    1. Select **AzureDatabricks** from the dropdown menu next to **Databricks linked service**
    1. Select **Setting** from the navigation bar in the middle of the screen
    1. Write **/Production/scripts/validate** in the text field on **Notebook path**
-   1. Expand the **Base parameters** by clicking on the arrow next to **Base parameters**
-   1. Select **New** 
-   1. Configure the parameter
-      1. Name: validate_type
-      2. Value: adf_pipeline
 
 1. Connect the Training activity and the Validation activity (by dragging the green box on the right of train activity to the validation activity)
    ![Screenshot task](media/Azure-DataFactory-2.9.png) 
