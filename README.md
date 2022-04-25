@@ -131,7 +131,7 @@ GitHub Actions works with so called 'workflow' files. These are `.yml` files tha
    ![Rename and copy.](media/rename-and-copy-ci.png "rename and copy")
 
 7. Edit the contents of the copied content according to the comment instructions (marked as `TODO`). After you have made the changes accordingly, press the button **Start commit** to commit the changes. Choose an appropriate commit message.
-   ![Edit CI pipeline.](media/edit-and-commit.png "CI pipeline")
+   ![Edit CI pipeline.](media/edit-and-commit-ci-extended.png "CI pipeline")
 
 ### Task 2: Run the CI Pipeline
 1. Test the pipeline by going into the **Actions** tab and selecting **CI** in the workflow options. You can manually trigger the workflow by pressing **Run workflow**.
@@ -142,6 +142,11 @@ GitHub Actions works with so called 'workflow' files. These are `.yml` files tha
 
    **Hint:** if the pipeline fails make sure that you have made the correct changes in the `.yml` script. You can verify this by debugging through the terminal window, or by comparing your `CI-pipeline.yml` file with the `./environment_setup/CI-pipeline-solution.yml` file.
    ![Inspect workflow CI.](media/inspect-ci-workflow.png "Inspect workflow CI")
+
+    If the pipeline run is successful, you should now see the files appear in your Databricks workspace:
+
+   ![Inspect Databricks after workflow CI.](media/databricks-workspace-dev-success.png "Inspect Databricks workspace")
+
 
 ## Exercise 3: Setup the CICD Development Pipeline
 
@@ -174,7 +179,7 @@ Duration: 20 minutes
    ![Rename and copy.](media/rename-and-copy-cicd-dev.png "rename and copy")
 
 7. Edit the contents of the copied content according to the comment instructions. In this `.yml` file, you can clearly see the CI/CD structure. First, a quality check is done (CI), followed by a deployment step (CD). After you have made the changes accordingly, press the button **Start commit** to commit the changes. Choose an appropriate commit message.
-   ![Edit CI pipeline.](media/edit-and-commit.png "CI pipeline")
+   ![Edit CI pipeline.](media/edit-and-commit-cicd.png "CICD pipeline")
 
 ### Task 2: Run the CICD Development Pipeline
 1. Test the pipeline by going into the **Actions** tab and selecting **CICD-dev** in the workflow options. You can manually trigger the workflow by pressing **Run workflow**.
@@ -205,34 +210,34 @@ Before we create the Train pipeline, we need to configure the Azure DataFactory.
 
 1. In the **Azure Portal** navigate to your resource group. 
 
-1. Select the Azure DataFactory resource called **adf-[NAME]**.
+2. Select the Azure DataFactory resource called **adf-[NAME]**.
     ![Screenshot task](media/Azure-DataFactory-1.1.png) 
 
-1. Select **Open** within the **Open Azure Data Factory Studio** square.
+3. Select **Open** within the **Open Azure Data Factory Studio** square.
    ![Screenshot task](media/Azure-DataFactory-1.3.png) 
 
-1. In the left navigation bar click on the blue **Toolbox icon** to open the **Manage screen**.
+4. In the left navigation bar click on the blue **Toolbox icon** to open the **Manage screen**.
    ![Screenshot task](media/Azure-DataFactory-1.4.png) 
 
-1. Select the blue **Plus icon** next to the text **New** to create a new Linked Service
+5. Select the blue **Plus icon** next to the text **New** to create a new Linked Service
    ![Screenshot task](media/Azure-DataFactory-1.5.png) 
 
-1. Select **Compute** next to **Data store**
+6. Select **Compute** next to **Data store**
    ![Screenshot task](media/Azure-DataFactory-1.6.png) 
 
-1. Select **Azure Databricks**
+7. Select **Azure Databricks**
    ![Screenshot task](media/Azure-DataFactory-1.7.png) 
 
-1. Configure the Azure Databricks linked service
+8. Configure the Azure Databricks linked service
    1. Name: AzureDatabricks
       ![Screenshot task](media/Azure-DataFactory-1.8.1.png) 
-   1. Azure subscription: TODO: provide name
+   2. Azure subscription: iig-shareddnaplatformsandbox-prd
       ![Screenshot task](media/Azure-DataFactory-1.8.2.png) 
-   1. Databricks workspace: adb-[NAME]
+   3. Databricks workspace: adb-[NAME] or dbw-[NAME]
       ![Screenshot task](media/Azure-DataFactory-1.8.3.png) 
-   1. Select cluster: Existing interactive cluster
+   4. Select cluster: Existing interactive cluster
       ![Screenshot task](media/Azure-DataFactory-1.8.4.png) 
-   1. Generate an access Token for Databricks
+   5. Generate an access Token for Databricks
       1. Go to your Databricks workspace
       1. Select **Settings** icon and then **User Settings** in the lower left corner of your Databricks workspace.
          ![Screenshot task](media/Azure-DataFactory-1.8.5.2.png) 
@@ -242,15 +247,18 @@ Before we create the Train pipeline, we need to configure the Azure DataFactory.
          ![Screenshot task](media/Azure-DataFactory-1.8.5.4.png) 
       1. Copy the token with CTRL + C or right clicking the token text and select copy
          ![Screenshot task](media/Azure-DataFactory-1.8.5.5.png) 
-   1. Go back to your Azure Databricks linked service and paste the Access Token inside the **Access Token** field (CTRL + V or right clicking and select paste) **
+   6. Go back to your Azure Databricks linked service and paste the Access Token inside the **Access Token** field (CTRL + V or right clicking and select paste) **
        ![Screenshot task](media/Azure-DataFactory-1.8.6.png) 
        _** Please note: in practice it is not recommended to copy and paste Access Tokens manually. Instead of this, use an Azure KeyVault to store any credentials. For this training and simplicity purposes we have not used an Azure KeyVault._
 
-   1. Existing cluster id: Select one of the existing clusters
+   7. Existing cluster id: Select one of the existing clusters. If none exist yet, create a new one in the **Compute** tab of your Databricks workspace first. When selecting a Databricks runtime, make sure to pick an ML cluster, and not a Standard one.
        ![Screenshot task](media/Azure-DataFactory-1.8.7.png) 
 
-1. Create the linked service by selecting **Create** at the bottom
-   ![Screenshot task](media/Azure-DataFactory-1.9.png) 
+9. Click **Test connection** at the bottom to verify that the linked service can be created:
+    ![Test Databricks connection](media/adf-test-databricks-connection.png)
+
+11. Create the linked service by selecting **Create** at the bottom
+    ![Screenshot task](media/Azure-DataFactory-1.9.png) 
 
 
 ### Task 2: Create the train pipeline
@@ -270,13 +278,13 @@ Now that we configured the Data Factory, we need to create the train pipeline th
       ![Screenshot task](media/Azure-DataFactory-2.5.png) 
    1. Select **Azure Databricks** from the navigation bar in the middle of the screen and select the **AzureDatabricks** linked service from the dropdown menu
       ![Screenshot task](media/Azure-DataFactory-2.6.png) 
-   1. Write **/Production/scripts/train** in the text field on **Notebook path**
+   1. Write **/Production/scripts/train** in the text field on **Notebook path** (or use the browsing functionality to select the location in the UI).
       ![Screenshot task](media/Azure-DataFactory-2.7.png)  
    1. Expand the **Base parameters** by clicking on the arrow next to **Base parameters**
       1. Select **New** 
       1. Configure the parameter
          1. Name: train_type
-         2. Value: adf_pipeline
+         2. Value: register_model
       ![Screenshot task](media/Azure-DataFactory-2.8.png) 
 
 1. On the left select **Databricks** again and then drag **Notebook** into the white canvas on the right.
@@ -285,12 +293,7 @@ Now that we configured the Data Factory, we need to create the train pipeline th
    1. Select **Azure Databricks** from the navigation bar in the middle of the screen
    1. Select **AzureDatabricks** from the dropdown menu next to **Databricks linked service**
    1. Select **Setting** from the navigation bar in the middle of the screen
-   1. Write **/Development/scripts/validate** in the text field on **Notebook path**
-   1. Expand the **Base parameters** by clicking on the arrow next to **Base parameters**
-   1. Select **New** 
-   1. Configure the parameter
-      1. Name: validate_type
-      2. Value: adf_pipeline
+   1. Write **/Production/scripts/validate** in the text field on **Notebook path**
 
 1. Connect the Training activity and the Validation activity (by dragging the green box on the right of train activity to the validation activity)
    ![Screenshot task](media/Azure-DataFactory-2.9.png) 
@@ -298,7 +301,7 @@ Now that we configured the Data Factory, we need to create the train pipeline th
 ### Task 3: Run the Train Pipeline
 Now that we have the Train Pipeline, we will run the pipeline by triggering a Debug run.
 
-1. Select **Debug** in the navigation bar at the top (right of **Save as template**, **Validate**)
+1. Select **Debug** in the navigation bar at the top (right of **Validate**)
    ![Screenshot task](media/Azure-DataFactory-3.1.png) 
 
 1. Monitor the Pipeline run at the bottom of the screen
@@ -308,7 +311,7 @@ Now that we have the Train Pipeline, we will run the pipeline by triggering a De
    
 ### Task 4: Review Train Outputs
 
-1. Log in to Go to your Databricks workspace. Make sure you select **Machine Learning** so you can access the models section. Open your **Models** section, and observe the versions of the registered model: `classifier`. The latest version is the one registered by the train pipeline you have run in the previous task.
+1. Log in to go to your Databricks workspace. Make sure you select **Machine Learning** so you can access the models section. Open your **Models** section, and observe the versions of the registered model: `classifier`. The latest version is the one registered by the train pipeline you have run in the previous task.
 
    ![See models in Databricks](media/devops-build-outputs-01.png "Select models in Databricks")
    ![See registered models in Databricks](media/devops-build-outputs-02.png "See registered models")    
@@ -342,16 +345,13 @@ Duration: 5 minutes
 ## Wrap-up
 
 Congratulations on completing this tutorial.
-If you want to continue practicing with ML Ops, we have created additional exercises. Find out about automation and continous integration of ML Ops with the following exercise [link](#Additional-Exercise-Test-train-and-Release-Pipelines).
-If you no longer intend to use your Azure Portal subscriptions with your created resources, please do not forget to delete your resources. Instructions on how to delete your resources are provided in the following exercise [link](#Deletion-Exercise-Delete-resource-in-the-Azure-Portal)
-
 To recap, in this tutorial you learned about:
 
 1. Creating a Continuous Integration Pipeline to support continuous development.
 
-2. Creating a Train Pipeline to support model training.
-
-3. Creating a Release Pipeline to support model deployment.
+2. Creating a Release Pipeline to support model deployment.
+ 
+3. Creating a Train Pipeline to support model training.
 
 ## Deletion Exercise: Delete resource in the Azure Portal
 

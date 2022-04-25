@@ -12,7 +12,7 @@ def get_models(model_name):
     all_models = sorted(all_models, key= lambda x: x.version, reverse=True)
     production_models = [model for model in all_models if model.current_stage=="Production"]
     if len(production_models) == 0:
-      raise ValueError("No models found in production")
+      return all_models[0], None
     elif len(all_models) == 0:
       raise ValueError("No models found")
     elif len(production_models) > 1:
@@ -26,6 +26,16 @@ def get_accuracy_model(model):
 # COMMAND ----------
 
 last_model, production_model = get_models(model_name)
+
+if not production_model:
+  print(f"Transitioning last {model_name} model to production since there is no model in production yet.")
+  client.transition_model_version_stage(
+    name=model_name,
+    version=last_model.version,
+    stage="Production"
+  )
+  dbutils.notebook.exit("Model successfully transitioned to production, exiting...")
+
 acc_last = get_accuracy_model(last_model)
 acc_prod = get_accuracy_model(production_model)
 print(f"Production {model_name} model version {production_model.version} accuracy: {acc_prod}")
