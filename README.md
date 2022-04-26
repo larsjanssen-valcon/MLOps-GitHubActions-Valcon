@@ -176,6 +176,23 @@ GitHub Actions works with so called 'workflow' files. These are `.yml` files tha
 
    ![Inspect Databricks after workflow CI.](media/databricks-workspace-dev-success.png "Inspect Databricks workspace")
 
+### Task 4: Trigger the CI Pipeline (challenge!)
+1. Now trigger the pipeline automatically (instead of running it manually like we did just now) by introducing a code change:
+
+   a. Create a new feature branch off the development branch (either in GitHub or in Databricks Repos)
+   
+   b. Make sure you have the feature branch checked out in Databricks Repos
+
+   c. Make a small change in the train notebook (in the scripts folder), then commit and push:
+
+      ![Commit and push](media/dbx-repos-commit.png)
+   
+   d. In your GitHub project, observe that there have been recent pushes to the feature branch and create a pull request. Make sure that you set the **development** branch as base branch! Merge the branch to close the pull request.
+
+      ![Pull request](media/git-pull-request.png)
+      ![Pull request to dev](media/git-pull-request-2.png)
+   
+   d. Observe that the CI pipeline has automatically ran again, since it was triggered by the merge into development as we configured in the yml file.
 
 ## Exercise 3: Setup the CICD Development Pipeline
 

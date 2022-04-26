@@ -33,7 +33,7 @@ jobs:
         with:
           python-version: '3.7'
           architecture: 'x64'
-      # Install pip
+      # Install pip - you can expand this with additional package installs that you would need for running unit tests (this is not included in this example)
       - run: |
           python -m pip install --upgrade pip==21.3.1
 
@@ -47,8 +47,8 @@ jobs:
       # Archive notebook scripts as artifacts
       # With this action we archive the Data Science scripts as an artifact,
       # which are saved and can be reviewed anytime this is required.
-      - name: Archive OPS files
+      - name: Archive files
         uses: actions/upload-artifact@v3
         with:
-          name: opsscripts
+          name: scripts
           path: scripts/

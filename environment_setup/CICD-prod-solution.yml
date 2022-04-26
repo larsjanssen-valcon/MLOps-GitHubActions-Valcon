@@ -34,10 +34,10 @@ jobs:
           pip install flake8_formatter_junit_xml
           flake8 --exit-zero .
       # Archive notebook scripts
-      - name: Archive OPS files
+      - name: Archive files
         uses: actions/upload-artifact@v3
         with:
-          name: opsscripts
+          name: scripts
           path: scripts/
   CD:
     needs: CI
