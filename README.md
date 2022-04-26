@@ -125,7 +125,18 @@ To support best practices for data science and engineering code development, Dat
 
    ![Setup Databricks Repos](media/databricks-repos-setup.png)
 
-### Task 4: Explore the ML notebooks
+### Task 4: Create Databricks cluster
+To be able to execute the notebooks that are now visible in Databricks Repos, a cluster is required as compute. 
+
+1. In your Databricks workspace, go to the **Compute** tab and select **Create new cluster**:
+
+   ![Databricks New Cluster](media/dbx-new-cluster.png)
+
+2. Create a cluster in standard cluster mode, with the latest Long Term Support (LTS) Databricks runtime version (10.4 LTS), and all other settings as default:
+
+   ![Databricks Cluster Settings](media/dbx-cluster-settingss.png)
+
+### Task 5: Explore the ML notebooks
 You now have a direct link to your code repository right here in the Databricks workspace. It can be used just like your local IDE with a local version of the repository: create branches, commit and push code to the remote. 
 Explore the train and validate notebooks in the **scripts** folder: these are the notebooks that we will use to train and validate a Machine Learning model with during the tutorial. You do not have to make any adaptations to the notebooks.
 
@@ -176,7 +187,7 @@ GitHub Actions works with so called 'workflow' files. These are `.yml` files tha
 
    ![Inspect Databricks after workflow CI.](media/databricks-workspace-dev-success.png "Inspect Databricks workspace")
 
-### Task 4: Trigger the CI Pipeline (challenge!)
+### Task 4: Trigger the CI Pipeline
 1. Now trigger the pipeline automatically (instead of running it manually like we did just now) by introducing a code change:
 
    a. Create a new feature branch off the development branch (either in GitHub or in Databricks Repos)
@@ -187,18 +198,18 @@ GitHub Actions works with so called 'workflow' files. These are `.yml` files tha
 
       ![Commit and push](media/dbx-repos-commit.png)
    
-   d. In your GitHub project, observe that there have been recent pushes to the feature branch and create a pull request. Make sure that you set the **development** branch as base branch! Merge the branch to close the pull request.
+   d. In your GitHub project, observe that there have been recent pushes to the feature branch and create a pull request. Make sure that you set the **development** branch as base branch, but **don't merge the pull request yet**.
 
       ![Pull request](media/git-pull-request.png)
       ![Pull request to dev](media/git-pull-request-2.png)
    
-   d. Observe that the CI pipeline has automatically ran again, since it was triggered by the merge into development as we configured in the yml file.
+   d. Observe that the CI pipeline has automatically ran again, since it was triggered by the pull request as we configured it in the yml file.
 
 ## Exercise 3: Setup the CICD Development Pipeline
 
-After a new `push` to the `development` branch, we would like our Data Science files to be deployed automatically to the Development workspace. For this we will create a CI/CD pipeline that performs the CI steps, after which the Data Science files are deployed to Databricks in a CD step.
+After a new `push` to the `development` branch, we would like our Data Science files to be deployed automatically to the (development) Databricks workspace. For this we will create a CI/CD pipeline that performs the CI steps, after which the Data Science files are deployed to Databricks in a CD step.
 
-This way, there is an integration check, there is a clear overview of the Data Science files that are deployed (saved as artifacts), before the latest version of the Data Science files is deployed to the Databricks workspace.
+This way, there is an integration check, there is a clear overview of the files that are deployed (saved as artifacts), before the latest version of the files is deployed to the Databricks workspace.
 
 Duration: 20 minutes
 
@@ -224,22 +235,39 @@ Duration: 20 minutes
 6. Rename the `.yml` filename on top to `CICD-dev.yml`. And replace the content of the file with the copied template `.yml` file.
    ![Rename and copy.](media/rename-and-copy-cicd-dev.png "rename and copy")
 
-7. Edit the contents of the copied content according to the comment instructions. In this `.yml` file, you can clearly see the CI/CD structure. First, a quality check is done (CI), followed by a deployment step (CD). After you have made the changes accordingly, press the button **Start commit** to commit the changes. Choose an appropriate commit message.
+7. Edit the contents of the copied content according to the comment instructions. In this `.yml` file, you can clearly see the CI/CD structure. First, a quality check is done (CI), followed by a deployment step (CD). In this case, the CD step deploys our notebooks to a `Deployment` folder in the Databricks workspace. 
+
+8. After you have made the changes accordingly, press the button **Start commit** to commit the changes. Choose an appropriate commit message.
    ![Edit CI pipeline.](media/edit-and-commit-cicd.png "CICD pipeline")
 
    __Note__: A Python script is used for the deployment of Databricks notebooks. The class `DatabricksWorkspace` containing the logic for this has been developed together with the IDNAP team and is a template that is available to you within IKEA!
 
-### Task 2: Run the CICD Development Pipeline
-1. Test the pipeline by going into the **Actions** tab and selecting **CICD-dev** in the workflow options. You can manually trigger the workflow by pressing **Run workflow**.
+### Task 2: Trigger the CICD Development Pipeline
+In Exercise 3 you created a pull request which triggered the CI pipeline, but the code is not deployed to the Databricks workspace yet.
+
+1. Complete the pull request by merging the feature branch into the development branch in GitHub.
+
+__Note__: Alternatively, you could also test the pipeline by going into the **Actions** tab and selecting **CICD-dev** in the workflow options. You can manually trigger the workflow there by pressing **Run workflow**. Note that this will deploy the development branch before merging the feature branch into it - your latest changes from the pull request will not yet be deployed in this case.
+
    ![Run workflow CI.](media/run-cicd-dev-workflow.png "Run workflow CI")
 
 ### Task 3: Review output of CICD Development pipeline
 1. Inspect the pipeline run by clicking on the run that has just started. Inspect the two jobs (CI and CD), make sure that all steps have been performed.
 
    **Hint:** if the pipeline fails make sure that you have made the correct changes in the `.yml` script. You can verify this by debugging through the terminal window. Make sure that your GitHub Secrets are set correctly, and that they are referenced in the CD section of the pipeline. Or, you can of course compare your `CICD-dev.yml` file with the `./environment_setup/CICD-dev-solution.yml` file.
+
+### Task 4: Trigger the CICD pipeline
+In Exercise 3 you created a pull request which triggered the CI pipeline, but the code is not deployed to the Databricks workspace yet.
+
+1. Complete the pull request by merging the feature branch into the development branch.
+
+2. Observe the pipeline being triggered automatically.
+
 ## Exercise 4 (Extra challenge): Create Production Pipeline
 
-After a new `push` to the `main` branch, we would like our Data Science files to be deployed automatically to the Development workspace as well. For this we will create a CI/CD pipeline that performs the CI steps, after which the Data Science files are deployed to Databricks in a CD step. In essence, these steps are the same as for the CI/CD development pipeline. In this case however, we want to our Data Science files to be deployed to a different Databricks workspace folder.
+After a new `push` to the `main` branch, we would like our Data Science files to be deployed automatically to the (production) Databricks workspace as well. In a real life scenario we would use **seperate workspaces** for this, but for the sake of simplicity we re-use the same workspace in this tutorial.
+
+For this we will create a CI/CD pipeline that performs the CI steps, after which the Data Science files are deployed to Databricks in a CD step. In essence, these steps are the same as for the CI/CD development pipeline. In this case however, we want to our Data Science files to be deployed to a different Databricks workspace folder (`Production`).
 
 Duration: 25 minutes
 
@@ -308,20 +336,19 @@ Before we create the Train pipeline, we need to configure the Azure DataFactory.
 11. Create the linked service by selecting **Create** at the bottom
     ![Screenshot task](media/Azure-DataFactory-1.9.png) 
 
-
 ### Task 2: Create the train pipeline
 Now that we configured the Data Factory, we need to create the train pipeline that trains and validates a model.
 
 1. In the left navigation bar select the blue **Pencil icon** to open the **Author screen**.
    ![Screenshot task](media/Azure-DataFactory-2.1.png) 
-1. Select the blue **Plus icon** next to **Filter resources by name**, select **Pipeline** and select **Pipeline** again.
+2. Select the blue **Plus icon** next to **Filter resources by name**, select **Pipeline** and select **Pipeline** again.
    ![Screenshot task](media/Azure-DataFactory-2.2.png) 
-1. On the right provide a **Name** for the DataFactory pipelines
+3. On the right provide a **Name** for the DataFactory pipelines
    ![Screenshot task](media/Azure-DataFactory-2.3.png) 
-1. On the left select **Databricks** (under **Activities**) and then drag **Notebook** into the white canvas on the right.
+4. On the left select **Databricks** (under **Activities**) and then drag **Notebook** into the white canvas on the right.
    ![Screenshot task](media/Azure-DataFactory-2.4.png) 
 
-1. Configure the Notebook activity for training
+5. Configure the Notebook activity for training
    1. Provide a **Name** for the **Azure Databricks Notebook** 
       ![Screenshot task](media/Azure-DataFactory-2.5.png) 
    1. Select **Azure Databricks** from the navigation bar in the middle of the screen and select the **AzureDatabricks** linked service from the dropdown menu
@@ -335,15 +362,15 @@ Now that we configured the Data Factory, we need to create the train pipeline th
          2. Value: register_model
       ![Screenshot task](media/Azure-DataFactory-2.8.png) 
 
-1. On the left select **Databricks** again and then drag **Notebook** into the white canvas on the right.
+6. On the left select **Databricks** again and then drag **Notebook** into the white canvas on the right.
 
-1. Configure the Notebook activity for validation using the same approach as with the training activity
+7. Configure the Notebook activity for validation using the same approach as with the training activity
    1. Select **Azure Databricks** from the navigation bar in the middle of the screen
    1. Select **AzureDatabricks** from the dropdown menu next to **Databricks linked service**
    1. Select **Setting** from the navigation bar in the middle of the screen
    1. Write **/Production/scripts/validate** in the text field on **Notebook path**
 
-1. Connect the Training activity and the Validation activity (by dragging the green box on the right of train activity to the validation activity)
+8. Connect the Training activity and the Validation activity (by dragging the green box on the right of train activity to the validation activity)
    ![Screenshot task](media/Azure-DataFactory-2.9.png) 
 
 ### Task 3: Run the Train Pipeline
@@ -416,3 +443,5 @@ If you don't have a free subscription and you would like to delete all your reso
 ### Additional resources and more information
 
 To learn more about MLOps with the MLflow service, visit the [documentation](https://www.mlflow.org/docs/latest/index.html)
+
+
