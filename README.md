@@ -227,6 +227,8 @@ Duration: 20 minutes
 7. Edit the contents of the copied content according to the comment instructions. In this `.yml` file, you can clearly see the CI/CD structure. First, a quality check is done (CI), followed by a deployment step (CD). After you have made the changes accordingly, press the button **Start commit** to commit the changes. Choose an appropriate commit message.
    ![Edit CI pipeline.](media/edit-and-commit-cicd.png "CICD pipeline")
 
+   __Note__: A Python script is used for the deployment of Databricks notebooks. The class `DatabricksWorkspace` containing the logic for this has been developed together with the IDNAP team and is a template that is available to you within IKEA!
+
 ### Task 2: Run the CICD Development Pipeline
 1. Test the pipeline by going into the **Actions** tab and selecting **CICD-dev** in the workflow options. You can manually trigger the workflow by pressing **Run workflow**.
    ![Run workflow CI.](media/run-cicd-dev-workflow.png "Run workflow CI")

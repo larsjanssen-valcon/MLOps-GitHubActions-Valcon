@@ -25,6 +25,7 @@ jobs:
         with:
           python-version: '3.7'
           architecture: 'x64'
+      # Set up pip - you can expand this with additional package installs that you would need for running unit tests (this is not included in this example)
       - run: |
           python -m pip install --upgrade pip==21.3.1
       # Code quality check
