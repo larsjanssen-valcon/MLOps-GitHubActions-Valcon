@@ -333,7 +333,7 @@ Before we create the Train pipeline, we need to configure the Azure DataFactory.
 9. Click **Test connection** at the bottom to verify that the linked service can be created:
     ![Test Databricks connection](media/adf-test-databricks-connection.png)
 
-11. Create the linked service by selecting **Create** at the bottom
+10. Create the linked service by selecting **Create** at the bottom
     ![Screenshot task](media/Azure-DataFactory-1.9.png) 
 
 ### Task 2: Create the train pipeline
@@ -353,7 +353,7 @@ Now that we configured the Data Factory, we need to create the train pipeline th
       ![Screenshot task](media/Azure-DataFactory-2.5.png) 
    1. Select **Azure Databricks** from the navigation bar in the middle of the screen and select the **AzureDatabricks** linked service from the dropdown menu
       ![Screenshot task](media/Azure-DataFactory-2.6.png) 
-   1. Write **/Production/scripts/train** in the text field on **Notebook path** (or use the browsing functionality to select the location in the UI).
+   1. Write **/Production/scripts/train** in the text field on **Notebook path** (or use the browsing functionality to select the location in the UI). Note that we are automating the execution of the Production notebooks here.
       ![Screenshot task](media/Azure-DataFactory-2.7.png)  
    1. Expand the **Base parameters** by clicking on the arrow next to **Base parameters**
       1. Select **New** 
@@ -374,7 +374,7 @@ Now that we configured the Data Factory, we need to create the train pipeline th
    ![Screenshot task](media/Azure-DataFactory-2.9.png) 
 
 ### Task 3: Run the Train Pipeline
-Now that we have the Train Pipeline, we will run the pipeline by triggering a Debug run.
+Now that we have the Train Pipeline, we will run the pipeline by triggering a Debug run. The nice thing about Data Factory pipelines is that they can be scheduled (e.g. daily, weekly, etc.) or triggered (e.g. when new data is dropped in a storage location). The full functionality of Data Factory is outside of scope for this workshop though, which is why we will manually trigger a Debug run to execute the pipeline.
 
 1. Select **Debug** in the navigation bar at the top (right of **Validate**)
    ![Screenshot task](media/Azure-DataFactory-3.1.png) 
@@ -399,7 +399,7 @@ Now that we have the Train Pipeline, we will run the pipeline by triggering a De
 
    ![Review experiment in Databricks.](media/dbx-params-metrics.png "Model parameters and metrics")
 
-4. Scroll down and review the model artifacts that were created for this model.
+4. Scroll down and review the model artifacts that were created for this model. The artifacts contain a metadata file and the ML model itself, but also a requirements file and a conda yaml file. These files can be used for packaging the model as a webservice. This is an advanced topic that we will not cover in the workshop today - we will consume the model inside of a Databricks notebook, instead of calling and endpoint. 
 
    ![Review model artifacts](media/dbx-artifacts.png "Registered dataset details in MLflow")
 
@@ -413,7 +413,7 @@ Duration: 5 minutes
 
 1. Open the Databricks workspace.
 
-2. Navigate to the script `scripts/score.py`, which is located in the current repository. 
+2. Navigate to the script `Production/scripts/score.py`, which is located in the current repository. 
 
 3. Follow the instructions in the notebook to load your model and the data. Apply the model to the loaded data and an individual sample.
 
