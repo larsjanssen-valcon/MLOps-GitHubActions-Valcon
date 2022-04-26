@@ -22,14 +22,14 @@ MLflow provides the following MLOps capabilities:
 
 Azure Data Factory is Azure's cloud ETL service for scale-out serverless data integration and data transformation. It offers a code-free UI for intuitive authoring and single-pane-of-glass monitoring and management.
 
-## AI, Experience - MLOps with MLflow and GitHub Actions <TO UPDATE ONCE FINAL>
+## AI, Experience - MLOps with MLflow and GitHub Actions <TO DO: update links>
 
 - [Data & AI Tech Immersion Workshop - Product Review Guide and Lab Instructions](#data---ai-tech-immersion-workshop---product-review-guide-and-lab-instructions)
   * [Scenario overview](#scenario-overview)
   * [Technology overview](#technology-overview)
   * [AI, Experience - MLOps with MLflow and GitHub Actions <TO UPDATE ONCE FINAL>](#ai--experience---mlops-with-mlflow-and-github-actions--to-update-once-final-)
   * [Prerequisite: resource group](#prerequisite--resource-group)
-  * [Exercise 1: Setup New Project in GitHub](#exercise-1--setup-new-project-in-azure-devops)
+  * [Exercise 1: Setup New Project in GitHub and Databricks](#exercise-1--setup--new--project--in--github--and--databricks)
     + [Task 1: Import code from a GitHub Repo](#task-1--import-code-from-a-github-repo)
     + [Task 2: Set Databricks variables as GitHub secrets](#task-2--set-databricks-variables-as-github-secrets)
   * [Exercise 2: Setup and Run the CI Pipeline](#exercise-2--setup-and-run-the-ci-pipeline)
@@ -60,7 +60,7 @@ Azure Data Factory is Azure's cloud ETL service for scale-out serverless data in
 
 A resource group is a logical grouping of cloud resources (Azure services). For this tutorial, you will need a resource group with Azure Databricks and Azure Data Factory resources in it.
 
-__Note__: This resource group has already been set up for you in the subscription `iig-shareddnaplatformsandbox-prd`, named: `rg-idnap-mlops-[name]-sandbox` (replace `[name]]` with your first name).
+__Note__: This resource group has already been set up for you in the subscription `iig-shareddnaplatformsandbox-prd`, named: `rg-idnap-mlops-[name]-sandbox` (replace `[name]` with your first name).
 
 A repository contains all of your project's files and each file's revision history. You can discuss and manage your project's work within the repository.
 
@@ -342,20 +342,20 @@ Now that we have the Train Pipeline, we will run the pipeline by triggering a De
 
 1. Log in to go to your Databricks workspace. Make sure you select **Machine Learning** so you can access the models section. Open your **Models** section, and observe the versions of the registered model: `classifier`. The latest version is the one registered by the train pipeline you have run in the previous task.
 
-   ![See models in Databricks](media/devops-build-outputs-01.png "Select models in Databricks")
-   ![See registered models in Databricks](media/devops-build-outputs-02.png "See registered models")    
+   ![See models in Databricks](media/dbx-select-models.png "Select models in Databricks")
+   ![See registered models in Databricks](media/dbx-see-registered-models.png "See registered models")    
 
 2. Select the latest version of your model to review its properties. Notice the `Soure Run` tag which links the registered to model to the Experiment that generated it.
 
-   ![Review registered model properties, notice Source Run.](!media/../media/devops-build-outputs-03.png "Registered model details")
+   ![Review registered model properties, notice Source Run.](media/dbx-registered-model-details.png "Registered model details")
 
 3. Click on the Source Run and observe the parameters and metrics for the experiment that created this model.
 
-   ![Review experiment in Databricks.](media/devops-build-outputs-04.png "Model parameters and metrics")
+   ![Review experiment in Databricks.](media/dbx-params-metrics.png "Model parameters and metrics")
 
 4. Scroll down and review the model artifacts that were created for this model.
 
-   ![Review model artifacts](medial/../media/devops-build-outputs-05.png "Registered dataset details in MLflow")
+   ![Review model artifacts](media/dbx-artifacts.png "Registered dataset details in MLflow")
 
 ## Exercise 6: Query the model and make predictions
 
