@@ -1,11 +1,15 @@
-# Data & AI Tech Immersion Workshop - Product Review Guide and Lab Instructions
+# Valcon ML Ops Workshop - Overview and Lab Instructions
 
 ## Scenario overview
 
-In this experience you will learn how Contoso Auto can use MLOps to formalize the process of training and deploying new models using a DevOps approach.
+In this experience you will learn how Contoso Auto can apply MLOps principles to formalize the process of training and consuming new models using a DevOps approach.
 The Contoso Corporation is a fictional but representative global manufacturing conglomerate. In this tutorial we will use a train script that has already been built to create a model that will predict whether a car is a compliant car, i.e., whether it meets tightening government regulations for low-emission vehicles. The dataset contains information about the condition of car components, type of material and its manufacturing year.
 
 ## Technology overview
+
+GitHub Actions makes it easy to automate all your software workflows, now with world-class CI/CD. Build, test, and deploy your code right from GitHub. Make code reviews, branch management, and issue triaging work the way you want.
+
+Azure Databricks is a data analytics platform optimized for the Microsoft Azure cloud services platform. Azure Databricks offers three environments for developing data intensive applications: Databricks SQL, Databricks Data Science & Engineering, and Databricks Machine Learning which is what we will use in this workshop).
 
 MLflow uses a Machine Learning Operations (MLOps) approach, which improves the quality and consistency of your machine learning solutions. 
 MLflow provides the following MLOps capabilities:
@@ -15,6 +19,8 @@ MLflow provides the following MLOps capabilities:
 - Model validation: automatically validate your trained models and select the optimal configuration for deploying them into production.
 - Deployment: productionize your models as a web service in the cloud, locally, or to IoT Edge devices.
 - Assessment: monitor your deployed model's performance, so you can drive improvements in the next version of the model.
+
+Azure Data Factory is Azure's cloud ETL service for scale-out serverless data integration and data transformation. It offers a code-free UI for intuitive authoring and single-pane-of-glass monitoring and management.
 
 ## AI, Experience - MLOps with MLflow and GitHub Actions <TO UPDATE ONCE FINAL>
 
@@ -49,22 +55,18 @@ MLflow provides the following MLOps capabilities:
     + [Task 1: Make Edits to Source Code](#task-1--make-edits-to-source-code)
     + [Task 2: Monitor Train Pipeline](#task-2--monitor-train-pipeline)
     + [Additional resources and more information](#additional-resources-and-more-information)
-## Prerequisite: resource group
 
-A resource group is a container for resources (Azure services). It is equivalent to a folder that contains files.
+## Prerequisites
 
-__Note__: We have already created a resource group for you, named: `RG-XXXXXX` (replace `XXXXXX` with your UniqueID). Continue with Exercise 1.
+A resource group is a logical grouping of cloud resources (Azure services). For this tutorial, you will need a resource group with Azure Databricks and Azure Data Factory resources in it.
 
-To create a resource group:
-1. Go to the Azure Portal: portal.azure.com
-2. Go to home and click on Resource Groups
-3. Click on +Create
-4. Choose your Subscription
-5. Choose a name for the Resource Group (no longer than 10 characters!). For example `RG-{your initials}`
-6. Set region to `(Europe) West Europe`
-7. Click on -> Review + Create -> Create
+__Note__: This resource group has already been set up for you in the subscription `iig-shareddnaplatformsandbox-prd`, named: `rg-idnap-mlops-[name]-sandbox` (replace `[name]]` with your first name).
 
-## Exercise 1: Setup New Project in GitHub
+A repository contains all of your project's files and each file's revision history. You can discuss and manage your project's work within the repository.
+
+__Note__: A GitHub repository has already been set up for you in the Inter IKEA Digital organization, named: `MLOps-[Name]-Sandbox` (replace `[Name]` with your first name). Continue with Exercise 1.
+
+## Exercise 1: Setup New Project in GitHub and Databricks
 
 In this exercise you will set up a repository in GitHub and import a repository that we have built for you.
 
@@ -75,6 +77,10 @@ Duration: 20 minutes
 In this task you import a repository from GitHub. This repository mostly consists of Python files and several YAML files. The Python files will perform the Data Science steps such as training, evaluating and deploying a model. The YAML files are used to set up the pipelines in GitHub Actions and determine which Python files to execute in which order.
 
 1. Within your repository import all files from the current repository, with the following [GitHub URL](https://github.com/larsjanssen-valcon/MLOps-GitHubActions-Valcon)
+
+2. Instead of a single main branch, this tutorial uses two branches to record the history of the project. The main branch stores the official release history, and the development branch serves as an integration branch for features. Create a development branch off the main branch:
+
+   ![Create development branch](media/git-dev-branch.png)
 
 ### Task 2: Set Databricks variables as GitHub secrets
 1. Go to your repository settings and click on **Secrets**, in the sub-tab click on **Actions**.
@@ -93,12 +99,35 @@ In this task you import a repository from GitHub. This repository mostly consist
 
    b. `DBX_TOKEN` = `XXXXXX` (replace `XXXXXX` with a Databricks token)
    
-      You can create a Databricks token by going to the Databricks environment and under 'User Settings' create a new token
+      You can create a Databricks token by going to the Databricks workspace and under 'User Settings' create a new token
       ![User settings](media/dbx-usersettings.png "Go to user settings")
       Now you can generate a token by pressing the 'Generate New Token' button. The comment input is not relevant. In this case, "DBX_api" is chosen.
       ![Generate token](media/generate-token-1.png "Generate token")
       ![Copy token](media/generate-token-2.png "Copy token")
       Now copy this token to the variable `DBX_TOKEN` in the GitHub secret field.
+
+### Task 3: Set up Databricks Repos
+To support best practices for data science and engineering code development, Databricks Repos provides repository-level integration with Git providers. You can develop code in a Databricks notebook and sync it with a remote Git repository. Databricks Repos lets you use Git functionality such as cloning a remote repo, managing branches, pushing and pulling changes, and visually comparing differences upon commit.
+
+1. Create a GitHub personal access token following the [GitHub documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). After creating the token, make sure to authorize SSO.
+
+2. Set up the Git Integration in your Databricks workspace:
+
+   a. In your Databricks workspace, go to User Settings and select the Git integration tab:
+
+      ![Databricks User Settings](media/dbx-usersettings.png)
+   
+   b. Select 'GitHub' as Git provider, enter your GitHub username and enter the personal access token you just created:
+
+      ![Databricks Git Integration](media/databricks-git-integration.png)
+
+3. In your Databricks workspace, go to the **Repos** tab and add your personal repository (in which you have just imported the files for this workshop):
+
+   ![Setup Databricks Repos](media/databricks-repos-setup.png)
+
+### Task 4: Explore the ML notebooks
+You now have a direct link to your code repository right here in the Databricks workspace. It can be used just like your local IDE with a local version of the repository: create branches, commit and push code to the remote. 
+Explore the train and validate notebooks in the **scripts** folder: these are the notebooks that we will use to train and validate a Machine Learning model with during the tutorial. You do not have to make any adaptations to the notebooks.
 
 ## Exercise 2: Setup and Run the CI Pipeline
 
