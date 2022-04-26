@@ -60,8 +60,9 @@ jobs:
       # Deploy notebooks using a Python file 
       - name: Deploy notebooks to workspace
       ## TODO: In order to deploy the notebooks to databricks, the generated token and organisation url of databricks need to be used as environment variables here
-      ## TODO: add two environment variables DBX_TOKEN and DBX_ORG_URL to this section. 
-      ## TODO: DBX_TOKEN should have ${{secrets.DBX_TOKEN}} as value. DBX_ORG_URL should have ${{secrets.DBX_ORG_URL}} as value
+      ## TODO: Add two environment variables DBX_TOKEN and DBX_ORG_URL to this section, each containing the DBX_TOKEN secret and the DBX_ORG_URL secret, respectively. 
+      ## TODO: Use this link for help if needed:
+      ## TODO: https://docs.github.com/en/actions/security-guides/encrypted-secrets#using-encrypted-secrets-in-a-workflow
       # Set token and url as environment variables
         env:
           env1_to_be_added: value1_to_be_added

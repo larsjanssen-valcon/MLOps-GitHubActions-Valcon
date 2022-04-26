@@ -13,6 +13,7 @@ import os
 import numpy as np
 import pandas as pd
 import mlflow
+from mlflow.exceptions import RestException
 
 # COMMAND ----------
 
@@ -133,20 +134,19 @@ y_test = labels[training_samples + validation_samples:]
 
 # COMMAND ----------
 workspace_dir = "/".join(dbutils.notebook.entry_point.getDbutils().notebook().getContext().notebookPath().get().split("/")[:-2]) # Folder of workspace
-if train_type == 'local':
-    try:
-        experiment_path = f"{workspace_dir}/Experiments/{}".format(model_name)
-    except:
-        print("Error folder does not yet exist!")
-    # For now set the experiment name equal to the given model_name
-    try:
-        mlflow.set_experiment(experiment_path)
-        # If experiment does not yet exist -> create experiment
-    except:
-        mlflow.create_experiment(experiment_path)
-        mlflow.set_experiment(experiment_path)
 
-    print("Saving experiment to: {}".format(experiment_path))
+experiment_path = f"{workspace_dir}/{model_name}"
+try:
+    mlflow.set_experiment(experiment_path)
+except RestException:
+    # If experiment does not yet exist -> create experiment
+    print("Experiment path does not yet exist; will create it now.")
+
+    # For now set the experiment name equal to the given model_name
+    mlflow.create_experiment(experiment_path)
+    mlflow.set_experiment(experiment_path)
+
+print("Saving experiment to: {}".format(experiment_path))
 
 print("Training model...")
 with mlflow.start_run():
