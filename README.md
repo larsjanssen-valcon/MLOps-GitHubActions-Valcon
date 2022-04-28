@@ -132,7 +132,7 @@ To be able to execute the notebooks that are now visible in Databricks Repos, a 
 
    ![Databricks New Cluster](media/dbx-new-cluster.png)
 
-2. Create a cluster in standard cluster mode, with the latest Long Term Support (LTS) Databricks runtime version (10.4 LTS), and all other settings as default:
+2. Create a cluster in standard cluster mode, with the latest Long Term Support (LTS) Databricks ML runtime version (10.4 LTS), and all other settings as default. You do not need a GPU cluster:
 
    ![Databricks Cluster Settings](media/dbx-cluster-settingss.png)
 
