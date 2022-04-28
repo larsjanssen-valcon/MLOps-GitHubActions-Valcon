@@ -26,7 +26,7 @@ jobs:
         with:
           python-version: '3.7'
           architecture: 'x64'
-      # Set up pip
+      # Set up pip - you can expand this with additional package installs that you would need for running unit tests (this is not included in this example)
       - run: |
           python -m pip install --upgrade pip==21.3.1
       # Code quality check
@@ -36,10 +36,10 @@ jobs:
           pip install flake8_formatter_junit_xml
           flake8 --exit-zero .
       # Archive notebook scripts
-      - name: Archive OPS files
+      - name: Archive files
         uses: actions/upload-artifact@v3
         with:
-          name: opsscripts
+          name: scripts
           path: scripts/
   CD:
     needs: CI
